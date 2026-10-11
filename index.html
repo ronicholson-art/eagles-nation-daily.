@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Eagles Nation Daily: an independent Philadelphia Eagles fan hub with the 2026 schedule, roster, news, fan polls and game-day gear.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦅</text></svg>">
+<title>Eagles Nation Daily</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  :root { color-scheme: dark; }
+  html, body { background-color: var(--eagles-bg-main); }
+  .gutter { padding-inline: 16px; }
+  .hidden-tab { display: none; }
+  .brand-mark { width: 44px; height: 44px; border-radius: 50%; background: var(--eagles-primary); border: 3px solid var(--eagles-accent); display: flex; align-items: center; justify-content: center; color: #fff; font: 900 0.8rem 'Impact', 'Arial Black', sans-serif; letter-spacing: .06em; box-shadow: 0 2px 10px var(--eagles-glow); flex-shrink: 0; transition: transform var(--transition-fast); }
+  .brand-wrapper:hover .brand-mark { transform: scale(1.08) rotate(-4deg); }
+  .overview-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; margin-bottom: 3rem; }
+  .feature-banner { background: linear-gradient(135deg, var(--eagles-primary-dark), var(--eagles-bg-card) 60%); border: 1px solid var(--eagles-border); border-radius: var(--radius-xl); position: relative; min-height: 320px; cursor: pointer; overflow: hidden; display: flex; align-items: flex-end; }
+  .feature-banner::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), rgba(255,255,255,.06) calc(10% - 1px) 10%); }
+  .feature-banner .inner { position: relative; padding: 2rem; }
+  .feature-banner h3 { font-size: 1.8rem; font-weight: 900; color: #fff; margin: 8px 0 6px; line-height: 1.2; }
+  .feature-banner p { color: var(--eagles-text-muted); font-size: .92rem; line-height: 1.5; max-width: 60ch; }
+  .tag-pill { background: var(--eagles-primary); color: #fff; font-size: .72rem; font-weight: 800; padding: 4px 10px; border-radius: var(--radius-sm); text-transform: uppercase; }
+  .side-stack { display: flex; flex-direction: column; gap: 1.2rem; }
+  .side-card { background: var(--eagles-bg-surface); border: 1px solid var(--eagles-border); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .side-card h4 { font-size: 1rem; font-weight: 800; color: #fff; }
+  .side-card .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 8px; }
+  .side-card p { font-size: .88rem; color: var(--eagles-text-accent); margin-bottom: 1rem; line-height: 1.5; }
+  .side-card .btn-primary, .side-card .btn-secondary { width: 100%; justify-content: center; font-size: .85rem; padding: 10px; text-decoration: none; }
+  .kicker-live { font-size: .72rem; font-weight: 700; }
+  .playmakers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .player-status { display: inline-block; font-size: .7rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-sm); margin-left: 6px; vertical-align: 2px; }
+  .player-status.out { background: rgba(239,68,68,.2); color: #f87171; border: 1px solid rgba(239,68,68,.4); }
+  .player-status.q { background: rgba(255,182,18,.18); color: var(--eagles-accent-gold); border: 1px solid rgba(255,182,18,.4); }
+  .player-status.new { background: rgba(34,197,94,.18); color: #4ade80; border: 1px solid rgba(34,197,94,.4); }
+  .player-note { font-size: .82rem; color: var(--eagles-text-accent); line-height: 1.45; }
+  .news-grid { grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)); }
+  .games-grid { grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
+  .roster-grid { grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr)); }
+  .merch-grid { grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+  .roster-search-input { min-width: 0; width: min(320px, 100%); }
+  .news-thumb { display: flex; align-items: flex-end; padding: 1rem 1.25rem; font: 900 2.4rem 'Impact', 'Arial Black', sans-serif; color: rgba(255,255,255,.14); letter-spacing: .04em; text-transform: uppercase; }
+  .merch-image-wrap { display: flex; align-items: center; justify-content: center; font: 900 3.4rem 'Impact', 'Arial Black', sans-serif; color: rgba(255,255,255,.85); letter-spacing: .04em; }
+  .merch-card .btn-primary { justify-content: center; text-decoration: none; }
+  .injury-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  .injury-grid .side-card ul { list-style: none; display: flex; flex-direction: column; gap: 6px; font-size: .88rem; color: var(--eagles-text-accent); }
+  .horn-box { text-align: center; }
+  .horn-box .big-horn { font-size: 3rem; margin: 1rem 0; }
+  .post-name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .source-link { color: var(--eagles-accent); font-size: .78rem; }
+  .article-body p { color: var(--eagles-text-accent); line-height: 1.7; margin-bottom: 1rem; font-size: .98rem; }
+  .article-body h2 { color: #fff; font-size: 1.6rem; font-weight: 900; line-height: 1.2; margin: 6px 0 1rem; padding-right: 40px; }
+  .follow-strip { margin-top: 3rem; background: linear-gradient(110deg, var(--eagles-primary-dark), var(--eagles-bg-surface)); border: 1px solid var(--eagles-border); border-radius: var(--radius-xl); padding: 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .follow-strip h3 { color: #fff; font-size: 1.6rem; font-weight: 900; }
+  .follow-strip p { color: var(--eagles-text-muted); margin-top: 4px; }
+  .follow-strip .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .follow-strip a { text-decoration: none; }
+  #mobile-drawer { background: #0E161C; border-bottom: 1px solid var(--eagles-border); padding: 1rem 1.5rem; }
+  #mobile-drawer .stack { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col a[target] { color: var(--eagles-text-muted); }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--eagles-accent); outline-offset: 2px; }
+  @media (max-width: 992px) { .overview-grid { grid-template-columns: 1fr; } .injury-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) {
+    .nav-container, .hero-section { padding-inline: 16px; }
+    .main-wrapper { padding-inline: 16px; }
+    .footer-wrap { padding-inline: 16px; }
+    .theme-toggle-btn .lbl { display: none; }
+    .brand-text span { display: none; }
+    .brand-text h1 { font-size: 1.05rem; }
+    .section-header h2 { font-size: 1.7rem; }
+    .post-name-row { grid-template-columns: 1fr; }
+    .matchup-card { padding: 1.25rem; }
+    .countdown-num { font-size: 1.3rem; }
+  }
+  @media (max-width: 420px) { .cart-toggle-btn .lbl { display: none; } .nav-actions { gap: 6px; } }
+  @media (prefers-reduced-motion: reduce) { .score-ticker-track { animation: none; } * { transition: none !important; } .tab-pane { animation: none; } }
+</style>
+
+</head>
+<body>
+<!-- Ticker -->
+<div class="score-ticker-wrapper">
+  <div class="ticker-badge"><span>🦅</span> NATION WIRE</div>
+  <div class="score-ticker-track" id="score-ticker-track"></div>
+</div>
+
+<!-- Header -->
+<header class="navbar-header">
+  <div class="nav-container">
+    <div class="brand-wrapper" data-tab="overview" role="button" tabindex="0" aria-label="Go to overview">
+      <div class="brand-mark" aria-hidden="true">END</div>
+      <div class="brand-text">
+        <h1 class="font-display">Eagles Nation Daily</h1>
+        <span>The Birds' Fan Hub · Unofficial</span>
+      </div>
+    </div>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><button class="nav-item-btn active" data-tab="overview" type="button">Overview</button></li>
+        <li><button class="nav-item-btn" data-tab="schedule" type="button">Schedule</button></li>
+        <li><button class="nav-item-btn" data-tab="roster" type="button">Roster</button></li>
+        <li><button class="nav-item-btn" data-tab="fanzone" type="button">Fan Zone</button></li>
+        <li><button class="nav-item-btn" data-tab="news" type="button">News</button></li>
+        <li><button class="nav-item-btn" data-tab="merch" type="button">Gear</button></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" id="theme-toggle-btn" type="button" title="Toggle Kelly Green Retro Theme"><span>🦅</span> <span class="lbl" id="theme-lbl">Switch to Kelly Green</span></button>
+      <a class="cart-toggle-btn" href="https://www.instagram.com/eaglesnation.daily/" target="_blank" rel="noopener" style="text-decoration:none" aria-label="Instagram @eaglesnation.daily"><span>📸</span> <span class="lbl">Instagram</span></a>
+      <button class="cart-toggle-btn" data-tab="merch" type="button"><span>🛒</span> <span class="lbl">Gear</span></button>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-drawer" hidden>
+  <div class="stack">
+    <button class="nav-item-btn" data-tab="overview" type="button">Overview</button>
+    <button class="nav-item-btn" data-tab="schedule" type="button">Schedule & Results</button>
+    <button class="nav-item-btn" data-tab="roster" type="button">Roster</button>
+    <button class="nav-item-btn" data-tab="fanzone" type="button">Fan Zone</button>
+    <button class="nav-item-btn" data-tab="news" type="button">Latest News</button>
+    <button class="nav-item-btn" data-tab="merch" type="button">Gear</button>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="hero-content">
+    <div>
+      <div class="hero-pill" id="hero-pill"><span>🦅</span> 2026 SEASON</div>
+      <h1 class="hero-title font-display">Bleed green.<br><span class="text-gradient">Every single day.</span></h1>
+      <p class="hero-subtitle">Your daily stop for the Birds: live kickoff countdown, 2026 schedule and scores, the current roster, fan polls and the Broad Street reaction board.</p>
+      <div class="hero-cta-group">
+        <button class="btn-primary" data-tab="fanzone" type="button">📊 Vote in Fan Polls</button>
+        <button class="btn-secondary" data-tab="roster" type="button">📋 View the Roster</button>
+        <button class="btn-secondary" data-tab="merch" type="button">🛍️ Kelly Green Gear</button>
+      </div>
+    </div>
+    <div class="matchup-card" id="next-matchup-container"></div>
+  </div>
+</section>
+
+<main class="main-wrapper">
+  <div class="stats-strip" id="stats-strip-container"></div>
+
+  <div class="tab-nav-bar" role="tablist">
+    <button class="tab-btn active" data-tab="overview" type="button">🏠 Overview</button>
+    <button class="tab-btn" data-tab="schedule" type="button">📅 Schedule & Results</button>
+    <button class="tab-btn" data-tab="roster" type="button">👥 Roster</button>
+    <button class="tab-btn" data-tab="fanzone" type="button">📣 Fan Zone</button>
+    <button class="tab-btn" data-tab="news" type="button">📰 Latest News</button>
+    <button class="tab-btn" data-tab="merch" type="button">🛍️ Gear Locker</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="tab-pane active" id="tab-pane-overview">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">🦅 Game Day Command Center</h2>
+        <p>Everything happening with the Birds this week.</p>
+      </div>
+      <button class="btn-secondary" data-tab="schedule" type="button">Full Season Calendar ➔</button>
+    </div>
+
+    <div class="overview-grid">
+      <div class="feature-banner" data-article="oline" role="button" tabindex="0">
+        <div class="inner">
+          <span class="tag-pill">Cover Story</span>
+          <h3>A rebuilt offensive line heads to London</h3>
+          <p>Lane Johnson retired and Cam Jurgens was traded within days. Four new faces line up next to Jordan Mailata against one of the league's best defenses.</p>
+        </div>
+      </div>
+      <div class="side-stack">
+        <div class="side-card">
+          <div class="head"><h4>📊 Quick Fan Poll</h4><span class="kicker-live" style="color:var(--eagles-accent-gold)">LIVE</span></div>
+          <p>Week 5 in London: how does it go against Jacksonville?</p>
+          <button class="btn-primary" data-tab="fanzone" type="button">Cast Your Vote ➔</button>
+        </div>
+        <div class="side-card">
+          <div class="head"><h4>🎺 “Fly, Eagles Fly”</h4><span class="kicker-live" style="color:#4ade80">GAME DAY</span></div>
+          <p>Turn it up and sing along before kickoff.</p>
+          <a class="btn-secondary" href="https://www.youtube.com/results?search_query=fly+eagles+fly+fight+song" target="_blank" rel="noopener">Play the Fight Song ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 1rem;">
+      <div>
+        <h3 style="font-size: 1.5rem; font-weight: 900; color: #fff;">⭐ Key Playmakers</h3>
+        <p>The players carrying the load in 2026.</p>
+      </div>
+      <button class="btn-secondary" data-tab="roster" type="button">Browse Full Roster ➔</button>
+    </div>
+    <div class="playmakers" id="playmakers"></div>
+
+    <div class="follow-strip">
+      <div>
+        <h3 class="font-display">Follow the Nation</h3>
+        <p>Daily recaps, stat graphics and hot takes on Instagram.</p>
+      </div>
+      <div class="btns">
+        <a class="btn-primary" href="https://www.instagram.com/eaglesnation.daily/" target="_blank" rel="noopener">Follow @eaglesnation.daily ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="tab-pane" id="tab-pane-schedule">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">📅 2026 Schedule & Results</h2>
+        <p>Every game, score and broadcast. Kickoffs shown in your time zone.</p>
+      </div>
+    </div>
+    <div class="schedule-filter-bar">
+      <button class="filter-pill-btn active schedule-filter-btn" data-filter="all" type="button">All Games</button>
+      <button class="filter-pill-btn schedule-filter-btn" data-filter="upcoming" type="button">Upcoming</button>
+      <button class="filter-pill-btn schedule-filter-btn" data-filter="results" type="button">Final Scores</button>
+      <button class="filter-pill-btn schedule-filter-btn" data-filter="home" type="button">Home at The Linc</button>
+      <button class="filter-pill-btn schedule-filter-btn" data-filter="away" type="button">Road Games</button>
+    </div>
+    <div class="games-grid" id="schedule-grid"></div>
+    <p style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:1.25rem;">Weeks 6–17 are subject to flexible scheduling. Sources: <a class="source-link" href="https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" target="_blank" rel="noopener">2026 season</a>, <a class="source-link" href="https://www.pro-football-reference.com/teams/phi/2026/gamelog" target="_blank" rel="noopener">Pro Football Reference</a>.</p>
+  </section>
+
+  <!-- ROSTER -->
+  <section class="tab-pane" id="tab-pane-roster">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">👥 2026 Roster</h2>
+        <p>The current roster with this week's injury and transaction notes. Tap a player for details.</p>
+      </div>
+    </div>
+    <div class="roster-controls">
+      <div class="roster-unit-filters">
+        <button class="filter-pill-btn active roster-unit-btn" data-unit="all" type="button">All Units</button>
+        <button class="filter-pill-btn roster-unit-btn" data-unit="offense" type="button">Offense</button>
+        <button class="filter-pill-btn roster-unit-btn" data-unit="defense" type="button">Defense</button>
+        <button class="filter-pill-btn roster-unit-btn" data-unit="special teams" type="button">Special Teams</button>
+      </div>
+      <input type="text" id="roster-search" class="roster-search-input" placeholder="🔍 Search by name or position" aria-label="Search roster">
+    </div>
+    <div class="roster-grid" id="roster-grid"></div>
+    <p style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:1.25rem;">Built from the <a class="source-link" href="https://www.nbcsportsphiladelphia.com/nfl/philadelphia-eagles/eagles-announce-initial-53-man-roster-for-2026-season/748708/" target="_blank" rel="noopener">initial 53-man roster</a>, updated with moves through Week 5.</p>
+  </section>
+
+  <!-- FAN ZONE -->
+  <section class="tab-pane" id="tab-pane-fanzone">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">📣 The South Philly Fan Zone</h2>
+        <p>Blast the air horn, vote in the weekly polls and post your reactions.</p>
+      </div>
+    </div>
+    <div class="fan-zone-grid">
+      <div class="soundboard-box horn-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:8px">
+          <h3 style="font-size:1.35rem;font-weight:900;color:#fff;">📢 Game Day Soundboard</h3>
+          <span style="font-size:.72rem;color:#4ade80;font-weight:700;">WEB AUDIO</span>
+        </div>
+        <canvas id="chant-visualizer" class="audio-visualizer-canvas" aria-hidden="true"></canvas>
+        <div class="chant-lyrics-carousel">
+          <div id="horn-display" class="current-lyric-line">Third down. Get loud.</div>
+        </div>
+        <div class="chant-controls-row">
+          <button class="btn-primary" id="stadium-horn-btn" type="button">📢 3rd Down Air Horn</button>
+          <button class="btn-secondary" id="drum-btn" type="button">🥁 Stadium Drum Line</button>
+          <a class="btn-secondary" href="https://www.youtube.com/results?search_query=fly+eagles+fly+fight+song" target="_blank" rel="noopener" style="text-decoration:none">🎺 Fight Song ↗</a>
+        </div>
+        <div style="font-size:.76rem;color:var(--eagles-text-muted);margin-top:1.2rem;">Turn your sound on. Effects are made right in your browser.</div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:8px">
+          <h3 style="font-size:1.35rem;font-weight:900;color:#fff;">📊 Weekly Fan Polls</h3>
+          <span style="font-size:.72rem;color:var(--eagles-accent-gold);font-weight:700;">LIVE RESULTS</span>
+        </div>
+        <div class="polls-container" id="polls-container"></div>
+        <p id="poll-status" style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:.75rem;">Loading results…</p>
+      </div>
+    </div>
+
+    <div class="discussion-board" style="margin-top:2.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;gap:8px;flex-wrap:wrap">
+        <div>
+          <h3 style="font-size:1.5rem;font-weight:900;color:#fff;">💬 Broad Street Reactions</h3>
+          <p style="color:var(--eagles-text-muted);font-size:.85rem;">Post your take on the Birds.</p>
+        </div>
+        <span style="font-size:.75rem;color:#4ade80;font-weight:700;" id="board-live">● LIVE</span>
+      </div>
+      <form class="discussion-form" id="new-comment-form">
+        <div class="post-name-row">
+          <input type="text" id="comment-author-input" class="discussion-input" placeholder="Your fan name (e.g. SouthPhillySal)" maxlength="40" required>
+          <select id="comment-tag-select" class="discussion-input" aria-label="Topic">
+            <option>Game Reactions</option>
+            <option>Film Breakdown</option>
+            <option>Tailgate & Meetups</option>
+            <option>Roster Moves</option>
+          </select>
+        </div>
+        <textarea id="comment-msg-input" class="discussion-textarea" rows="3" maxlength="500" placeholder="Share your game reaction, tailgate plans or thoughts on the Birds..." required></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <span id="board-status" style="font-size:.78rem;color:var(--eagles-text-muted);"></span>
+          <button type="submit" class="btn-primary" style="padding:8px 18px;font-size:.85rem;">Post Reaction 🦅</button>
+        </div>
+      </form>
+      <div class="discussion-comments-list" id="discussion-comments-list"></div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="tab-pane" id="tab-pane-news">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">📰 Latest News & Film Room</h2>
+        <p>This week's storylines, the injury report and the offseason that reshaped the roster.</p>
+      </div>
+    </div>
+    <div class="news-grid" id="news-grid"></div>
+    <div class="injury-grid" aria-label="Week 5 injury report">
+      <div class="side-card"><h4 style="color:#f87171;margin-bottom:.75rem">Out · Week 5</h4><ul><li>RB Saquon Barkley</li><li>RB Tank Bigsby</li><li>WR DeVonta Smith</li><li>S Marcus Epps (groin)</li></ul></div>
+      <div class="side-card"><h4 style="color:var(--eagles-accent-gold);margin-bottom:.75rem">Questionable</h4><ul><li>OLB Jonathan Greenard (ankle)</li><li>OLB A.J. Epenesa (back)</li></ul></div>
+      <div class="side-card"><h4 style="color:#4ade80;margin-bottom:.75rem">Expected to play</h4><ul><li>CB Quinyon Mitchell (knee)</li><li>LB Zack Baun (cleared protocol)</li><li>LB Jihaad Campbell (knee)</li></ul></div>
+    </div>
+  </section>
+
+  <!-- GEAR -->
+  <section class="tab-pane" id="tab-pane-merch">
+    <div class="section-header">
+      <div>
+        <h2 class="font-display">🛍️ Gear Locker</h2>
+        <p>Game-day picks for the Nation, plus a direct line to the team's official Pro Shop.</p>
+      </div>
+    </div>
+    <div class="merch-grid" id="merch-grid"></div>
+    <p style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:1.25rem;">Some links may be affiliate links. Eagles Nation Daily may earn a commission at no extra cost to you.</p>
+  </section>
+</main>
+
+<!-- Modals -->
+<div class="modal-overlay" id="player-modal" aria-hidden="true">
+  <div class="modal-dialog" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" type="button" aria-label="Close">✕</button>
+    <div id="player-modal-body"></div>
+  </div>
+</div>
+<div class="modal-overlay" id="article-modal" aria-hidden="true">
+  <div class="modal-dialog" style="max-width:760px" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" type="button" aria-label="Close">✕</button>
+    <div id="article-modal-body" class="article-body"></div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+<footer class="footer-wrap">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-mark" aria-hidden="true">END</div>
+        <h3 class="font-display" style="font-size:1.3rem;color:#fff;">Eagles Nation Daily</h3>
+      </div>
+      <p>An independent fan hub for the faithful who bleed midnight green and Kelly green, from Broad Street to the Linc.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#top" data-tab="overview">Overview</a></li>
+        <li><a href="#top" data-tab="schedule">2026 Schedule</a></li>
+        <li><a href="#top" data-tab="roster">Roster</a></li>
+        <li><a href="#top" data-tab="fanzone">Fan Zone</a></li>
+        <li><a href="#top" data-tab="merch">Gear Locker</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Team History</h4>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Super_Bowl_LII" target="_blank" rel="noopener">Super Bowl LII</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Super_Bowl_LIX" target="_blank" rel="noopener">Super Bowl LIX</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Philly_Special" target="_blank" rel="noopener">The Philly Special</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Lincoln_Financial_Field" target="_blank" rel="noopener">Lincoln Financial Field</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Fly,_Eagles_Fly" target="_blank" rel="noopener">“Fly, Eagles Fly”</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow the Nation</h4>
+      <p style="font-size:.85rem;color:var(--eagles-text-muted);margin-bottom:12px;">Recaps, stat graphics and game-day posts every day of the season.</p>
+      <a class="btn-primary" href="https://www.instagram.com/eaglesnation.daily/" target="_blank" rel="noopener" style="text-decoration:none;font-size:.85rem;padding:8px 14px;">@eaglesnation.daily ↗</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>Eagles Nation Daily is an independent fan site, not affiliated with or endorsed by the Philadelphia Eagles or the NFL. Info current as of Oct 10, 2026.</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ===================== DATA =====================
+  var TEAMS = {
+    WAS: { name: "Commanders", city: "Washington", color: "#5A1414" },
+    TEN: { name: "Titans", city: "Tennessee", color: "#0C2340" },
+    CHI: { name: "Bears", city: "Chicago", color: "#0B162A" },
+    LAR: { name: "Rams", city: "Los Angeles", color: "#003594" },
+    JAX: { name: "Jaguars", city: "Jacksonville", color: "#006778", rec: "3-1" },
+    CAR: { name: "Panthers", city: "Carolina", color: "#0085CA" },
+    DAL: { name: "Cowboys", city: "Dallas", color: "#041E42" },
+    NYG: { name: "Giants", city: "New York", color: "#0B2265" },
+    PIT: { name: "Steelers", city: "Pittsburgh", color: "#101820" },
+    ARI: { name: "Cardinals", city: "Arizona", color: "#97233F" },
+    IND: { name: "Colts", city: "Indianapolis", color: "#002C5F" },
+    SEA: { name: "Seahawks", city: "Seattle", color: "#002244" },
+    HOU: { name: "Texans", city: "Houston", color: "#03202F" },
+    SF:  { name: "49ers", city: "San Francisco", color: "#AA0000" }
+  };
+  var GAMES = [
+    { w: 1, o: "WAS", home: true,  t: "2026-09-13T16:25:00-04:00", tv: "FOX", res: "W", us: 24, them: 22, note: "Season opener at the Linc. A two-point win to start 1-0." },
+    { w: 2, o: "TEN", home: false, t: "2026-09-20T13:00:00-04:00", tv: "FOX", res: "W", us: 24, them: 20, note: "A four-point road win in Nashville." },
+    { w: 3, o: "CHI", home: false, t: "2026-09-28T20:15:00-04:00", tv: "ESPN/ABC", res: "L", us: 7, them: 27, note: "Monday Night Football at Soldier Field. The offense managed one touchdown." },
+    { w: 4, o: "LAR", home: true,  t: "2026-10-04T13:00:00-04:00", tv: "FOX", res: "L", us: 20, them: 24, note: "A four-point home loss drops the Birds to .500." },
+    { w: 5, o: "JAX", home: false, t: "2026-10-11T09:30:00-04:00", tv: "NFL Network", venue: "Tottenham Hotspur Stadium, London", note: "International game in London." },
+    { w: 6, o: "CAR", home: true,  t: "2026-10-18T13:00:00-04:00", tv: "CBS" },
+    { w: 7, o: "DAL", home: true,  t: "2026-10-26T20:15:00-04:00", tv: "ESPN/ABC", note: "Monday Night Football. First of two meetings with Dallas." },
+    { w: 8, o: "WAS", home: false, t: "2026-11-01T20:20:00-05:00", tv: "NBC", note: "Sunday Night Football." },
+    { w: 9, o: "NYG", home: true,  t: "2026-11-08T13:00:00-05:00", tv: "FOX" },
+    { w: 10, bye: true },
+    { w: 11, o: "PIT", home: true,  t: "2026-11-22T16:25:00-05:00", tv: "CBS" },
+    { w: 12, o: "DAL", home: false, t: "2026-11-26T16:30:00-05:00", tv: "FOX", note: "Thanksgiving Day in Arlington." },
+    { w: 13, o: "ARI", home: false, t: "2026-12-06T16:05:00-05:00", tv: "FOX", venue: "State Farm Stadium, Glendale" },
+    { w: 14, o: "IND", home: true,  t: "2026-12-13T13:00:00-05:00", tv: "FOX" },
+    { w: 15, o: "SEA", home: true,  t: "2026-12-19T17:00:00-05:00", tv: "FOX", note: "Saturday game." },
+    { w: 16, o: "HOU", home: true,  t: "2026-12-24T20:15:00-05:00", tv: "Prime Video", note: "Christmas Eve." },
+    { w: 17, o: "SF",  home: false, t: "2027-01-03T20:20:00-05:00", tv: "NBC", note: "Sunday Night Football." },
+    { w: 18, o: "NYG", home: false, tbd: "Jan 9 or 10, 2027", tv: "TBD", note: "Date and time to be announced." }
+  ];
+
+  // unit, pos, name, status (out|q|new|ir|null), note
+  var ROSTER = [
+    ["offense","QB","Jalen Hurts",null,"Franchise quarterback and captain, leading a reshaped offense under new coordinator Sean Mannion."],
+    ["offense","QB","Andy Dalton","new","Veteran backup acquired in a trade with Carolina."],
+    ["offense","QB","Tanner McKee",null,"Backup quarterback."],
+    ["offense","QB","Cole Payton","new","Fifth-round rookie from North Dakota State."],
+    ["offense","RB","Saquon Barkley","out","Out for Week 5."],
+    ["offense","RB","Tank Bigsby","out","Out for Week 5."],
+    ["offense","RB","Will Shipley","q","In line to start in London with Barkley and Bigsby out."],
+    ["offense","RB","Dameon Pierce","new","Added to the backfield. 1,684 career rushing yards entering the week."],
+    ["offense","RB","Carson Steele","new","Signed to add depth at running back."],
+    ["offense","WR","DeVonta Smith","out","Out for Week 5."],
+    ["offense","WR","Makai Lemon","new","First-round pick (No. 20 overall) from USC."],
+    ["offense","WR","Marquise “Hollywood” Brown","new","Signed in free agency on a one-year deal."],
+    ["offense","WR","Dontayvion Wicks","new","Acquired in a trade with Green Bay."],
+    ["offense","WR","Elijah Moore",null,"Receiver depth."],
+    ["offense","WR","Darius Cooper",null,"Receiver depth."],
+    ["offense","TE","Dallas Goedert",null,"Re-signed on a one-year deal."],
+    ["offense","TE","Johnny Mundt",null,"Blocking tight end."],
+    ["offense","TE","E.J. Jenkins",null,"Tight end depth."],
+    ["offense","TE","Eli Stowers","ir","Second-round rookie from Vanderbilt. On injured reserve."],
+    ["offense","LT","Jordan Mailata",null,"The veteran anchor of a rebuilt line."],
+    ["offense","LG","Willie Lampkin",null,"Expected starter at left guard."],
+    ["offense","C","Jake Majors","new","Signed and expected to start at center after the Cam Jurgens trade."],
+    ["offense","RG","Tyler Steen",null,"Expected starter at right guard."],
+    ["offense","RT","Markel Bell","new","Third-round rookie from Miami, stepping in at right tackle after Lane Johnson's retirement."],
+    ["offense","G","Landon Dickerson",null,"Veteran guard."],
+    ["offense","OL","Fred Johnson",null,"Swing tackle."],
+    ["offense","OL","Drew Kendall","out","Rehabbing a knee injury."],
+    ["offense","G","Micah Morris","new","Sixth-round rookie from Georgia."],
+    ["defense","DT","Jalen Carter",null,"Signed a four-year, $152M extension. The centerpiece of the defense."],
+    ["defense","DT","Jordan Davis",null,"Signed a three-year, $78M extension."],
+    ["defense","DT","Moro Ojomo",null,"Interior rotation."],
+    ["defense","DT","Byron Young",null,"Interior rotation."],
+    ["defense","DT","Ty Robinson",null,"Interior depth."],
+    ["defense","OLB","Jonathan Greenard","q","Acquired from Minnesota and extended (4 years, $100M). Questionable with an ankle injury."],
+    ["defense","OLB","Nolan Smith",null,"Edge rusher."],
+    ["defense","OLB","Jalyx Hunt",null,"Edge rusher."],
+    ["defense","OLB","A.J. Epenesa","q","Questionable with a back injury."],
+    ["defense","OLB","Arnold Ebiketie",null,"Edge depth."],
+    ["defense","LB","Zack Baun",null,"Cleared concussion protocol and expected to play."],
+    ["defense","LB","Jihaad Campbell",null,"Expected to play after being limited with a knee injury."],
+    ["defense","LB","Jeremiah Trotter Jr.",null,"Linebacker depth."],
+    ["defense","LB","Smael Mondon Jr.",null,"Linebacker depth."],
+    ["defense","CB","Quinyon Mitchell",null,"Practiced all week on a knee and expected to play."],
+    ["defense","CB","Cooper DeJean",null,"Slot corner and playmaker."],
+    ["defense","CB","Riq Woolen","new","Signed in free agency on a one-year, $12M deal."],
+    ["defense","CB","Jonathan Jones",null,"Veteran corner."],
+    ["defense","CB","Kelee Ringo",null,"Corner depth."],
+    ["defense","CB","Mac McWilliams",null,"Corner depth."],
+    ["defense","S","Drew Mukuba",null,"Starting safety."],
+    ["defense","S","Michael Carter II",null,"Safety."],
+    ["defense","S","Marcus Epps","out","Out with a groin injury."],
+    ["special teams","K","Jake Elliott",null,"Kicker."],
+    ["special teams","P","Braden Mann","new","Signed a four-year, $14M deal."],
+    ["special teams","LS","Rocco Underwood",null,"Long snapper."]
+  ];
+  var PLAYMAKERS = ["Jalen Hurts", "Jalen Carter", "Makai Lemon", "Quinyon Mitchell"];
+
+  var NEWS = [
+    { id: "oline", cat: "Week 5 Preview", title: "A rebuilt offensive line heads to London", date: "Oct 10, 2026", color: "#004C54",
+      body: ["Lane Johnson retired and Cam Jurgens was traded within a few days of each other, ending the most stable stretch of offensive line play in the league.",
+             "The expected starting five in London is Jordan Mailata at left tackle, Willie Lampkin at left guard, Jake Majors at center, Tyler Steen at right guard and third-round rookie Markel Bell at right tackle.",
+             "Only Mailata has a long résumé. The group faces a Jacksonville defense that is near the top of the league against the run and in points allowed."],
+      src: "https://www.philadelphiaeagles.com/news/game-preview-at-jaguars-6-storylines-to-follow-jordan-mailata-jalen-hurts-trevor-lawrence-travis-hunter-2026-nfl-week-6-london-international-game" },
+    { id: "rb", cat: "Backfield", title: "Next man up at running back", date: "Oct 10, 2026", color: "#056974",
+      body: ["Saquon Barkley and Tank Bigsby are both out for the trip to London.",
+             "Will Shipley is in line to start. Dameon Pierce, who has 1,684 career rushing yards, and newly signed Carson Steele give the Eagles two more backs to work with.",
+             "With DeVonta Smith also out, more of the offense falls on Jalen Hurts and the young receivers."],
+      src: "https://www.philadelphiaeagles.com/news/eagles-sign-jake-majors-and-carson-steele" },
+    { id: "jax", cat: "Scouting the Opponent", title: "Points are hard to find against the Jaguars", date: "Oct 10, 2026", color: "#003035",
+      body: ["Jacksonville comes in at 3-1. The defense allows 13.3 points and 74.3 rushing yards per game and has held 10 straight opponents to 20 points or fewer.",
+             "Jaguars kicker Cam Little holds the NFL record with a 68-yard field goal, so any drive that crosses midfield is a scoring threat.",
+             "Third-down conversions will decide whether the Eagles can sustain drives."],
+      src: "https://www.philadelphiaeagles.com/news/game-preview-at-jaguars-6-storylines-to-follow-jordan-mailata-jalen-hurts-trevor-lawrence-travis-hunter-2026-nfl-week-6-london-international-game" },
+    { id: "ajb", cat: "Offseason", title: "The A.J. Brown era ends with a trade to New England", date: "Offseason", color: "#235213",
+      body: ["The Eagles traded A.J. Brown to the Patriots for a 2028 first-round pick and a 2027 fifth-rounder.",
+             "They moved up to No. 20 in the draft, in a deal with Dallas, to take USC receiver Makai Lemon. They also signed Marquise Brown and traded for Dontayvion Wicks.",
+             "The receiver room around DeVonta Smith is younger and faster, and still finding its rhythm."],
+      src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" },
+    { id: "dline", cat: "Defense", title: "Paying the men up front", date: "Offseason", color: "#387822",
+      body: ["Jalen Carter signed a four-year, $152 million extension and Jordan Davis signed for three years and $78 million.",
+             "The Eagles also traded for Jonathan Greenard from Minnesota and gave him a four-year, $100 million deal.",
+             "Departures included Reed Blankenship, Nakobe Dean and Jaelan Phillips, so Vic Fangio is working with plenty of new pieces."],
+      src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" },
+    { id: "staff", cat: "Coaching", title: "Mannion takes over the offense", date: "Offseason", color: "#0E161C",
+      body: ["Sean Mannion was named offensive coordinator on January 29, replacing Kevin Patullo after one season.",
+             "Chris Kuper replaced longtime offensive line coach Jeff Stoutland, and Parks Frazier became quarterbacks coach.",
+             "Vic Fangio returns as defensive coordinator under Nick Sirianni."],
+      src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" }
+  ];
+
+  var POLLS = [
+    { id: "wk5", q: "Week 5 in London: how does it go?", opts: [["big-w","Eagles win by 7+"],["close-w","Eagles win a close one"],["close-l","Close loss"],["big-l","Jags win by 7+"]] },
+    { id: "step", q: "With Saquon out, who has to step up most?", opts: [["hurts","Jalen Hurts"],["shipley","Will Shipley"],["oline","The rebuilt offensive line"],["lemon","Makai Lemon"]] },
+    { id: "move", q: "Best move of the offseason?", opts: [["carter","Extending Jalen Carter"],["greenard","Trading for Jonathan Greenard"],["lemon","Drafting Makai Lemon"],["ajb","Trading A.J. Brown for a first"]] },
+    { id: "final", q: "Where does 2026 end?", opts: [["sb","Super Bowl"],["nfc","NFC Championship"],["wc","Early playoff exit"],["miss","Missing the playoffs"]] }
+  ];
+
+  // Add an Amazon Associates tag (e.g. "yourtag-20") to turn gear links into affiliate links.
+  var AFFILIATE_TAG = "";
+  var GEAR = [
+    { name: "Kelly Green Throwback Jersey", badge: "Fan Favorite", label: "KG", bg: "linear-gradient(135deg,#4C8C2B,#235213)", q: "philadelphia eagles kelly green throwback jersey" },
+    { name: "Sideline Cold-Weather Beanie", badge: "Winter", label: "❄", bg: "linear-gradient(135deg,#004C54,#003035)", q: "philadelphia eagles sideline knit beanie" },
+    { name: "Midnight Green Pullover Hoodie", badge: "Road Games", label: "MG", bg: "linear-gradient(135deg,#056974,#0E161C)", q: "philadelphia eagles midnight green hoodie" },
+    { name: "Tailgate Cooler & Chairs", badge: "Lot Life", label: "TG", bg: "linear-gradient(135deg,#A5ACAF,#131E26)", q: "philadelphia eagles tailgate cooler chair" },
+    { name: "Game Day Flag & Banner", badge: "Home", label: "🚩", bg: "linear-gradient(135deg,#003035,#4C8C2B)", q: "philadelphia eagles house flag banner" }
+  ];
+
+  // ===================== HELPERS =====================
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]; }); }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var fmtDay = new Intl.DateTimeFormat(undefined, { weekday: "short", month: "short", day: "numeric" });
+  var fmtTime = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit", timeZoneName: "short" });
+  function toast(msg) {
+    var el = document.createElement("div"); el.className = "toast-msg"; el.textContent = msg;
+    $("toast-container").appendChild(el); setTimeout(function () { el.remove(); }, 3200);
+  }
+  function teamLabel(g) { var t = TEAMS[g.o]; return t.city + " " + t.name; }
+
+  // ===================== TABS =====================
+  function showTab(name) {
+    document.querySelectorAll(".tab-pane").forEach(function (p) { p.classList.toggle("active", p.id === "tab-pane-" + name); });
+    document.querySelectorAll(".tab-btn, .nav-item-btn").forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-tab") === name); });
+    $("mobile-drawer").hidden = true; $("mobile-menu-btn").setAttribute("aria-expanded", "false");
+    store("end-tab", name);
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-tab]");
+    if (t) {
+      if (t.tagName === "A") e.preventDefault();
+      showTab(t.getAttribute("data-tab"));
+      if (t.closest(".hero-section, .footer-wrap, .side-card, .section-header, .nav-actions")) document.querySelector(".tab-nav-bar").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    var a = e.target.closest("[data-article]");
+    if (a) openArticle(a.getAttribute("data-article"));
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeModals();
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-article], .brand-wrapper, .player-card")) { e.preventDefault(); e.target.click(); }
+  });
+  $("mobile-menu-btn").addEventListener("click", function () {
+    var d = $("mobile-drawer"); d.hidden = !d.hidden; this.setAttribute("aria-expanded", d.hidden ? "false" : "true");
+  });
+  var savedTab = store("end-tab");
+  if (savedTab && $("tab-pane-" + savedTab)) showTab(savedTab);
+
+  // ===================== THEME =====================
+  function setKelly(on) {
+    document.body.classList.toggle("theme-kelly", on);
+    $("theme-lbl").textContent = on ? "Switch to Midnight Green" : "Switch to Kelly Green";
+  }
+  setKelly(store("end-theme") === "kelly");
+  $("theme-toggle-btn").addEventListener("click", function () {
+    var on = !document.body.classList.contains("theme-kelly");
+    setKelly(on); store("end-theme", on ? "kelly" : "midnight");
+    toast(on ? "Kelly green throwback mode on 💚" : "Back to midnight green 🦅");
+  });
+
+  // ===================== RECORD / STATS / TICKER =====================
+  var played = GAMES.filter(function (g) { return g.res; });
+  var wins = played.filter(function (g) { return g.res === "W"; }).length, losses = played.length - wins;
+  var pf = played.reduce(function (a, g) { return a + g.us; }, 0), pa = played.reduce(function (a, g) { return a + g.them; }, 0);
+  var rec = wins + "-" + losses;
+  $("hero-pill").innerHTML = "<span>🦅</span> 2026 SEASON • " + rec + " RECORD • NFC EAST";
+
+  var STATS = [
+    ["🏈", rec, "Season Record"],
+    ["📈", (pf / played.length).toFixed(1), "Points Per Game"],
+    ["🎯", "643", "Passing Yards · 7 TD"],
+    ["🏃", "436", "Rushing Yards · 4.2 Avg"],
+    ["💥", "4", "Defensive Sacks"]
+  ];
+  $("stats-strip-container").innerHTML = STATS.map(function (s) {
+    return '<div class="stat-metric-card"><div class="stat-icon">' + s[0] + '</div><div class="stat-meta"><div class="stat-val font-num">' + s[1] + '</div><div class="stat-label">' + s[2] + '</div></div></div>';
+  }).join("");
+
+  var tickerItems = GAMES.filter(function (g) { return !g.bye; }).map(function (g) {
+    var t = TEAMS[g.o];
+    if (g.res) return '<span class="ticker-item">WK ' + g.w + ' · ' + (g.home ? "vs " : "@ ") + g.o + ' <span class="' + (g.res === "W" ? "win" : "loss") + '">' + g.res + ' ' + g.us + '-' + g.them + '</span></span>';
+    var when = g.t ? fmtDay.format(new Date(g.t)) : g.tbd;
+    return '<span class="ticker-item">WK ' + g.w + ' · ' + (g.home ? "vs " : "@ ") + g.o + ' <span class="upcoming">' + esc(when) + ' · ' + g.tv + '</span></span>';
+  }).join("");
+  $("score-ticker-track").innerHTML = tickerItems + tickerItems;
+
+  // ===================== MATCHUP CARD =====================
+  var now = Date.now();
+  var next = GAMES.find(function (g) { return g.t && !g.res && new Date(g.t).getTime() + 4 * 3600e3 > now; });
+  if (next) {
+    var opp = TEAMS[next.o], kt = new Date(next.t);
+    $("next-matchup-container").innerHTML =
+      '<div class="matchup-header"><span class="label">⏱️ Next Kickoff · Week ' + next.w + '</span><span class="broadcast">' + next.tv + '</span></div>' +
+      '<div class="matchup-teams">' +
+        '<div class="team-box eagles"><div class="logo-circle font-num" style="font-size:1rem;color:#fff">PHI</div><div class="team-name">Eagles</div><div class="team-record">' + rec + '</div></div>' +
+        '<div class="vs-badge">' + (next.home ? "VS" : "@") + '</div>' +
+        '<div class="team-box opponent"><div class="logo-circle font-num" style="font-size:1rem;color:#fff;background:' + opp.color + '">' + next.o + '</div><div class="team-name">' + opp.name + '</div><div class="team-record">' + (opp.rec || opp.city) + '</div></div>' +
+      '</div>' +
+      '<div class="countdown-grid">' +
+        ['Days','Hours','Mins','Secs'].map(function (l, i) { return '<div class="countdown-unit"><div class="countdown-num font-num" id="cd-' + i + '">0</div><div class="countdown-label">' + l + '</div></div>'; }).join("") +
+      '</div>' +
+      '<div class="matchup-details-row"><span>📅 ' + fmtDay.format(kt) + ' · ' + fmtTime.format(kt) + '</span></div>' +
+      '<div class="matchup-details-row" style="margin-bottom:0"><span>📍 ' + esc(next.venue || (next.home ? "Lincoln Financial Field, Philadelphia" : opp.city)) + '</span></div>';
+    (function tick() {
+      var s = Math.max(0, Math.floor((kt.getTime() - Date.now()) / 1000));
+      var vals = [Math.floor(s / 86400), Math.floor(s % 86400 / 3600), Math.floor(s % 3600 / 60), s % 60];
+      vals.forEach(function (v, i) { var el = $("cd-" + i); if (el) el.textContent = String(v).padStart(i ? 2 : 1, "0"); });
+      if (s > 0) setTimeout(tick, 1000);
+    })();
+  } else {
+    $("next-matchup-container").innerHTML = '<div class="matchup-header"><span class="label">Season complete</span></div><p style="color:var(--eagles-text-muted)">See you next season, Nation.</p>';
+  }
+
+  // ===================== SCHEDULE =====================
+  var schedFilter = "all";
+  function renderSchedule() {
+    $("schedule-grid").innerHTML = GAMES.filter(function (g) {
+      if (g.bye) return schedFilter === "all" || schedFilter === "upcoming";
+      if (schedFilter === "upcoming") return !g.res;
+      if (schedFilter === "results") return !!g.res;
+      if (schedFilter === "home") return g.home;
+      if (schedFilter === "away") return !g.home;
+      return true;
+    }).map(function (g) {
+      if (g.bye) return '<div class="game-card" style="opacity:.7"><div class="game-card-header"><span class="game-week-badge">Week ' + g.w + '</span></div><div class="game-opponent-name">Bye Week</div><div class="game-card-footer">Rest up, Nation.</div></div>';
+      var t = TEAMS[g.o];
+      var when = g.t ? fmtDay.format(new Date(g.t)) + " · " + fmtTime.format(new Date(g.t)) : g.tbd;
+      var badge = g.res ? '<span class="game-result-badge ' + (g.res === "W" ? "win" : "loss") + '">' + (g.res === "W" ? "Win" : "Loss") + '</span>'
+                        : '<span class="game-result-badge upcoming">' + (next && next.w === g.w ? "Next Up" : "Upcoming") + '</span>';
+      var score = g.res ? '<div class="game-score-val font-num">' + g.us + '-' + g.them + '</div>' : '<div style="font-size:.78rem;color:var(--eagles-text-muted)">' + g.tv + '</div>';
+      return '<div class="game-card"' + (next && next.w === g.w ? ' style="border-color:var(--eagles-border-highlight)"' : '') + '>' +
+        '<div class="game-card-header"><span class="game-week-badge">Week ' + g.w + '</span>' + badge + '</div>' +
+        '<div class="game-teams-row"><div class="game-opponent-info"><div class="game-opponent-icon font-num" style="font-size:.8rem;background:' + t.color + ';color:#fff">' + g.o + '</div>' +
+        '<div><div class="game-opponent-name">' + (g.home ? "vs " : "@ ") + t.name + '</div><div class="game-location-badge">' + (g.home ? "🏟️ Home · The Linc" : "✈️ Road") + '</div></div></div>' +
+        '<div class="game-score-display">' + score + '</div></div>' +
+        '<div class="game-card-footer">' + esc(when) + (g.res ? ' · ' + g.tv : '') + (g.note ? '<br>' + esc(g.note) : '') + '</div></div>';
+    }).join("");
+  }
+  document.querySelectorAll(".schedule-filter-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      schedFilter = b.getAttribute("data-filter");
+      document.querySelectorAll(".schedule-filter-btn").forEach(function (x) { x.classList.toggle("active", x === b); });
+      renderSchedule();
+    });
+  });
+  renderSchedule();
+
+  // ===================== ROSTER =====================
+  var STATUS = { out: ["out", "OUT"], q: ["q", "QUESTIONABLE"], ir: ["out", "IR"], new: ["new", "NEW"] };
+  function initials(n) { return n.replace(/[“”"]/g, "").split(" ").filter(function (p) { return /^[A-Z]/.test(p) && !/^(Jr\.|II|III)$/.test(p); }).map(function (p) { return p[0]; }).slice(0, 2).join(""); }
+  function playerCard(p, idx) {
+    var st = p[3] ? STATUS[p[3]] : null;
+    return '<div class="player-card" data-player="' + idx + '" role="button" tabindex="0">' +
+      '<div class="player-jersey-number font-num">' + p[1] + '</div>' +
+      '<div class="player-header"><div class="player-avatar-circle"' + (p[0] === "defense" ? ' style="background:var(--eagles-primary-dark)"' : p[0] === "special teams" ? ' style="background:#387822"' : '') + '>' + initials(p[2]) + '</div>' +
+      '<div class="player-meta"><h3>' + esc(p[2]) + '</h3><span class="position-badge">' + p[1] + ' • ' + p[0].replace(/\b\w/g, function (c) { return c.toUpperCase(); }) + '</span>' +
+      (st ? '<span class="player-status ' + st[0] + '">' + st[1] + '</span>' : '') + '</div></div>' +
+      '<div class="player-note">' + esc(p[4]) + '</div></div>';
+  }
+  var unit = "all";
+  function renderRoster() {
+    var q = $("roster-search").value.trim().toLowerCase();
+    var html = ROSTER.map(function (p, i) { return [p, i]; }).filter(function (x) {
+      var p = x[0];
+      if (unit !== "all" && p[0] !== unit) return false;
+      return !q || (p[2] + " " + p[1] + " " + p[4]).toLowerCase().indexOf(q) !== -1;
+    }).map(function (x) { return playerCard(x[0], x[1]); }).join("");
+    $("roster-grid").innerHTML = html || '<p style="color:var(--eagles-text-muted)">No players match that search.</p>';
+  }
+  $("roster-search").addEventListener("input", renderRoster);
+  document.querySelectorAll(".roster-unit-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      unit = b.getAttribute("data-unit");
+      document.querySelectorAll(".roster-unit-btn").forEach(function (x) { x.classList.toggle("active", x === b); });
+      renderRoster();
+    });
+  });
+  renderRoster();
+  $("playmakers").innerHTML = PLAYMAKERS.map(function (n) {
+    var i = ROSTER.findIndex(function (p) { return p[2] === n; }); return playerCard(ROSTER[i], i);
+  }).join("");
+
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest("[data-player]"); if (!c) return;
+    var p = ROSTER[+c.getAttribute("data-player")], st = p[3] ? STATUS[p[3]] : null;
+    $("player-modal-body").innerHTML =
+      '<div class="player-header" style="margin-bottom:1.25rem"><div class="player-avatar-circle" style="width:72px;height:72px;font-size:1.6rem">' + initials(p[2]) + '</div>' +
+      '<div class="player-meta"><h3 style="font-size:1.6rem">' + esc(p[2]) + '</h3><span class="position-badge">' + p[1] + ' • ' + p[0].toUpperCase() + '</span>' +
+      (st ? '<span class="player-status ' + st[0] + '">' + st[1] + '</span>' : '') + '</div></div>' +
+      '<p style="color:var(--eagles-text-accent);line-height:1.6;margin-bottom:1.25rem">' + esc(p[4]) + '</p>' +
+      '<a class="btn-secondary" style="text-decoration:none" href="https://www.pro-football-reference.com/search/search.fcgi?search=' + encodeURIComponent(p[2].replace(/[“”"]/g, "")) + '" target="_blank" rel="noopener">Career stats on Pro Football Reference ↗</a>';
+    openModal("player-modal");
+  });
+
+  // ===================== MODALS =====================
+  var lastFocus = null;
+  function openModal(id) { lastFocus = document.activeElement; var m = $(id); m.classList.add("open"); m.setAttribute("aria-hidden", "false"); m.querySelector(".modal-close-btn").focus(); }
+  function closeModals() {
+    document.querySelectorAll(".modal-overlay.open").forEach(function (m) { m.classList.remove("open"); m.setAttribute("aria-hidden", "true"); });
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.querySelectorAll(".modal-overlay").forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m || e.target.closest(".modal-close-btn")) closeModals(); });
+  });
+  function openArticle(id) {
+    var n = NEWS.find(function (x) { return x.id === id; }); if (!n) return;
+    $("article-modal-body").innerHTML = '<div class="news-category-tag">' + esc(n.cat) + ' · ' + esc(n.date) + '</div><h2>' + esc(n.title) + '</h2>' +
+      n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join("") +
+      '<a class="btn-secondary" style="text-decoration:none" href="' + n.src + '" target="_blank" rel="noopener">Read the full source ↗</a>';
+    openModal("article-modal");
+  }
+
+  // ===================== NEWS =====================
+  $("news-grid").innerHTML = NEWS.map(function (n) {
+    return '<div class="news-card" data-article="' + n.id + '" role="button" tabindex="0">' +
+      '<div class="news-thumb" style="background:linear-gradient(135deg,' + n.color + ',#070B0E)">' + esc(n.cat) + '</div>' +
+      '<div class="news-body"><div><div class="news-category-tag">' + esc(n.cat) + '</div><div class="news-title">' + esc(n.title) + '</div>' +
+      '<div class="news-summary">' + esc(n.body[0]) + '</div></div>' +
+      '<div class="news-meta-row"><span>' + esc(n.date) + '</span><span style="color:var(--eagles-accent)">Read ➔</span></div></div></div>';
+  }).join("");
+
+  // ===================== GEAR =====================
+  $("merch-grid").innerHTML =
+    '<div class="merch-card"><div class="merch-image-wrap" style="background:linear-gradient(135deg,#004C54,#4C8C2B)">PRO<span class="merch-badge">Official Store</span></div>' +
+    '<div class="merch-content"><div><div class="merch-name">The team\'s official Pro Shop</div><p style="font-size:.85rem;color:var(--eagles-text-muted);line-height:1.5">Authentic jerseys and licensed gear, straight from the Eagles\' own store.</p></div>' +
+    '<a class="btn-primary" style="margin-top:1rem" href="https://www.philadelphiaeagles.com/proshop" target="_blank" rel="noopener">Visit the Pro Shop ↗</a></div></div>' +
+    GEAR.map(function (g) {
+      var url = "https://www.amazon.com/s?k=" + encodeURIComponent(g.q) + (AFFILIATE_TAG ? "&tag=" + encodeURIComponent(AFFILIATE_TAG) : "");
+      return '<div class="merch-card"><div class="merch-image-wrap" style="background:' + g.bg + '">' + g.label + '<span class="merch-badge">' + esc(g.badge) + '</span></div>' +
+        '<div class="merch-content"><div class="merch-name">' + esc(g.name) + '</div>' +
+        '<a class="btn-primary" style="margin-top:1rem" href="' + url + '" target="_blank" rel="noopener sponsored">Shop on Amazon ↗</a></div></div>';
+    }).join("");
+
+  // ===================== SOUNDBOARD =====================
+  var actx = null, analyser = null, canvas = $("chant-visualizer"), cctx = canvas.getContext("2d");
+  function audio() {
+    if (!actx) {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+      actx = new AC(); analyser = actx.createAnalyser(); analyser.fftSize = 128; analyser.connect(actx.destination);
+    }
+    if (actx.state === "suspended") actx.resume();
+    return actx;
+  }
+  function draw() {
+    var w = canvas.width = canvas.clientWidth * (window.devicePixelRatio || 1), h = canvas.height = canvas.clientHeight * (window.devicePixelRatio || 1);
+    cctx.clearRect(0, 0, w, h);
+    if (!analyser) return;
+    var d = new Uint8Array(analyser.frequencyBinCount); analyser.getByteFrequencyData(d);
+    var bw = w / d.length, col = getComputedStyle(document.body).getPropertyValue("--eagles-primary-light").trim() || "#056974";
+    for (var i = 0; i < d.length; i++) { var bh = d[i] / 255 * h; cctx.fillStyle = col; cctx.fillRect(i * bw, h - bh, bw - 2, bh); }
+    requestAnimationFrame(draw);
+  }
+  function horn() {
+    var a = audio(); if (!a) return;
+    var t = a.currentTime, g = a.createGain(); g.connect(analyser);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.28, t + 0.04); g.gain.setValueAtTime(0.28, t + 1.3); g.gain.exponentialRampToValueAtTime(0.001, t + 1.6);
+    [233, 294, 349].forEach(function (f) { var o = a.createOscillator(); o.type = "sawtooth"; o.frequency.setValueAtTime(f * 0.97, t); o.frequency.linearRampToValueAtTime(f, t + 0.1); o.connect(g); o.start(t); o.stop(t + 1.65); });
+    $("horn-display").textContent = "📢 DE-FENSE! DE-FENSE!"; draw();
+    setTimeout(function () { $("horn-display").textContent = "Third down. Get loud."; }, 1800);
+  }
+  function drums() {
+    var a = audio(); if (!a) return;
+    var pattern = [0, 0.25, 0.5, 1, 1.25, 1.5, 2, 2.125, 2.25, 2.5, 3];
+    pattern.forEach(function (off, i) {
+      var t = a.currentTime + off * 0.45, o = a.createOscillator(), g = a.createGain();
+      o.type = "sine"; o.frequency.setValueAtTime(i % 3 === 0 ? 110 : 160, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18);
+      g.gain.setValueAtTime(0.6, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+      o.connect(g); g.connect(analyser); o.start(t); o.stop(t + 0.25);
+    });
+    $("horn-display").textContent = "🥁 E · A · G · L · E · S"; draw();
+    setTimeout(function () { $("horn-display").textContent = "Third down. Get loud."; }, 1800);
+  }
+  $("stadium-horn-btn").addEventListener("click", horn);
+  $("drum-btn").addEventListener("click", drums);
+
+  // ===================== POLLS + BOARD (shared via db) =====================
+  var tallies = {}, mine = {}, db = null, uid = null, canWrite = true, shared = false;
+  try { mine = JSON.parse(store("end-votes") || "{}") || {}; } catch (e) { mine = {}; }
+
+  function renderPolls() {
+    $("polls-container").innerHTML = POLLS.map(function (p) {
+      var t = tallies[p.id] || {}, total = p.opts.reduce(function (a, o) { return a + (t[o[0]] || 0); }, 0);
+      var show = !!mine[p.id] || !canWrite;
+      return '<div class="poll-card"><div class="poll-question">' + esc(p.q) + '</div>' +
+        p.opts.map(function (o) {
+          var n = t[o[0]] || 0, pct = total ? Math.round(n / total * 100) : 0, me = mine[p.id] === o[0];
+          return '<button type="button" class="poll-option-btn" data-poll="' + p.id + '" data-opt="' + o[0] + '"' + (canWrite ? '' : ' disabled') + (me ? ' style="border-color:var(--eagles-accent)"' : '') + '>' +
+            '<span class="poll-progress-fill" style="width:' + (show ? pct : 0) + '%"></span>' +
+            '<span class="poll-text">' + esc(o[1]) + (me ? ' ✓' : '') + '</span><span class="poll-pct">' + (show ? pct + '%' : '') + '</span></button>';
+        }).join("") +
+        '<div style="font-size:.75rem;color:var(--eagles-text-muted)">' + (total ? total + (total === 1 ? " vote" : " votes") : "No votes yet. Be the first.") + '</div></div>';
+    }).join("");
+  }
+  $("polls-container").addEventListener("click", function (e) {
+    var b = e.target.closest(".poll-option-btn"); if (!b || b.disabled) return;
+    var p = b.getAttribute("data-poll"), o = b.getAttribute("data-opt"); if (mine[p] === o) return;
+    var prev = mine[p]; mine[p] = o; store("end-votes", JSON.stringify(mine));
+    if (shared) {
+      db.doc("votes/" + uid).set(Object.assign({}, mine)).then(function () { toast("Vote counted 🦅"); }).catch(function (err) {
+        if (err && err.code === "invalid_argument") { canWrite = false; $("poll-status").textContent = "Voting is open to contributors on this page. You can still see the results."; }
+        renderPolls();
+      });
+    } else {
+      var t = tallies[p] = tallies[p] || {}; if (prev) t[prev] = Math.max(0, (t[prev] || 0) - 1); t[o] = (t[o] || 0) + 1;
+      toast("Vote saved on this device 🦅");
+    }
+    renderPolls();
+  });
+
+  // Board: each fan's posts live in one doc at posts/<their id> as {items:[...]}
+  var allPosts = [], myPosts = [], localPosts = [];
+  try { localPosts = JSON.parse(store("end-posts") || "[]") || []; } catch (e) { localPosts = []; }
+  function timeAgo(ms) {
+    var s = Math.max(0, (Date.now() - ms) / 1000);
+    if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago";
+    return fmtDay.format(new Date(ms));
+  }
+  function renderBoard() {
+    var list = (shared ? allPosts : localPosts).slice().sort(function (a, b) { return b.ts - a.ts; }).slice(0, 60);
+    $("discussion-comments-list").innerHTML = list.length ? list.map(function (c) {
+      return '<div class="comment-card"><div class="comment-header"><div class="comment-author">' + esc(c.name) + ' <span class="comment-badge">' + esc(c.tag) + '</span></div>' +
+        '<span class="comment-time">' + timeAgo(c.ts) + '</span></div><div class="comment-text">' + esc(c.text) + '</div></div>';
+    }).join("") : '<p style="color:var(--eagles-text-muted);font-size:.9rem">No reactions yet. Start the conversation above.</p>';
+  }
+  var savedName = store("end-name"); if (savedName) $("comment-author-input").value = savedName;
+  var posting = false;
+  $("new-comment-form").addEventListener("submit", function (e) {
+    e.preventDefault(); if (posting) return;
+    var name = $("comment-author-input").value.trim().slice(0, 40), text = $("comment-msg-input").value.trim().slice(0, 500), tag = $("comment-tag-select").value;
+    if (!name || !text) return;
+    store("end-name", name);
+    var post = { name: name, text: text, tag: tag, ts: Date.now() };
+    if (shared && canWrite) {
+      posting = true;
+      var items = myPosts.concat([post]).slice(-20);
+      db.doc("posts/" + uid).set({ items: items }).then(function () {
+        $("comment-msg-input").value = ""; toast("Reaction posted 🦅");
+      }).catch(function (err) {
+        if (err && err.code === "invalid_argument") { canWrite = false; $("board-status").textContent = "Posting is open to contributors on this page."; }
+        else toast("Couldn't post right now. Try again in a moment.");
+      }).then(function () { posting = false; });
+    } else {
+      localPosts.push(post); localPosts = localPosts.slice(-20); store("end-posts", JSON.stringify(localPosts));
+      $("comment-msg-input").value = ""; renderBoard(); toast("Reaction saved on this device 🦅");
+    }
+  });
+
+  function localMode(msg) {
+    shared = false; tallies = {};
+    Object.keys(mine).forEach(function (p) { tallies[p] = {}; tallies[p][mine[p]] = 1; });
+    $("poll-status").textContent = msg; $("board-status").textContent = "Posts are saved on this device.";
+    $("board-live").textContent = "● LOCAL"; renderPolls(); renderBoard();
+  }
+  renderPolls(); renderBoard();
+
+  (async function () {
+    if (!window.claude || !window.claude.use) { localMode("Your picks are saved on this device."); return; }
+    try {
+      var r = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+      db = r[0]; var user = r[1];
+      if (!db) { localMode("Sign in to see what the rest of the Nation picked. Your picks are saved on this device."); return; }
+      uid = user ? await user.id() : null;
+      if (user && user.can) { var c = await user.can("data.write"); if (c === false) canWrite = false; }
+      if (!uid) canWrite = false;
+      shared = true;
+      $("poll-status").textContent = canWrite ? "Tap a pick to vote. You can change it anytime." : "Results are live. Voting is open to contributors on this page.";
+      $("board-status").textContent = canWrite ? "" : "Reading only. Posting is open to contributors on this page.";
+      db.collection("votes").onSnapshot(function (snap) {
+        var t = {};
+        snap.docs.forEach(function (d) {
+          var v = d.data() || {};
+          if (d.id === uid) { mine = Object.assign({}, v); store("end-votes", JSON.stringify(mine)); }
+          POLLS.forEach(function (p) {
+            var k = v[p.id];
+            if (typeof k === "string" && p.opts.some(function (o) { return o[0] === k; })) { t[p.id] = t[p.id] || {}; t[p.id][k] = (t[p.id][k] || 0) + 1; }
+          });
+        });
+        tallies = t; renderPolls();
+      }, function () { localMode("Live results are unavailable right now. Your picks are saved on this device."); });
+      db.collection("posts").onSnapshot(function (snap) {
+        var all = [];
+        snap.docs.forEach(function (d) {
+          var items = (d.data() || {}).items; if (!Array.isArray(items)) return;
+          var clean = items.filter(function (x) { return x && typeof x.text === "string" && typeof x.name === "string"; }).map(function (x) {
+            return { name: String(x.name).slice(0, 40), text: String(x.text).slice(0, 500), tag: String(x.tag || "Game Reactions").slice(0, 30), ts: +x.ts || 0 };
+          });
+          if (d.id === uid) myPosts = clean;
+          all = all.concat(clean);
+        });
+        allPosts = all; renderBoard();
+      }, function () { localMode("Live results are unavailable right now. Your picks are saved on this device."); });
+    } catch (e) { localMode("Your picks are saved on this device."); }
+  })();
+})();
+</script>
+
+</body>
+</html>
