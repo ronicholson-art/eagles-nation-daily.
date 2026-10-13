@@ -397,11 +397,11 @@
     <div class="footer-col">
       <h4>Explore</h4>
       <ul>
-        <li><a href="#top" data-tab="overview">Overview</a></li>
-        <li><a href="#top" data-tab="schedule">2026 Schedule</a></li>
-        <li><a href="#top" data-tab="roster">Roster</a></li>
-        <li><a href="#top" data-tab="fanzone">Fan Zone</a></li>
-        <li><a href="#top" data-tab="merch">Gear Locker</a></li>
+        <li><a href="#overview" data-tab="overview">Overview</a></li>
+        <li><a href="#schedule" data-tab="schedule">2026 Schedule</a></li>
+        <li><a href="#roster" data-tab="roster">Roster</a></li>
+        <li><a href="#fanzone" data-tab="fanzone">Fan Zone</a></li>
+        <li><a href="#merch" data-tab="merch">Gear Locker</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -604,7 +604,14 @@
     if (t) {
       if (t.tagName === "A") e.preventDefault();
       showTab(t.getAttribute("data-tab"));
-      if (t.closest(".hero-section, .footer-wrap, .side-card, .section-header, .nav-actions")) document.querySelector(".tab-nav-bar").scrollIntoView({ behavior: "smooth", block: "start" });
+      if (t.closest(".navbar-header, #mobile-drawer, .hero-section, .footer-wrap, .side-card, .section-header, .follow-strip")) {
+        var bar = document.querySelector(".tab-nav-bar");
+        var head = document.querySelector(".navbar-header");
+        var y = bar.getBoundingClientRect().top + window.scrollY - (head ? head.offsetHeight : 0) - 8;
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: Math.max(0, y), behavior: reduce ? "auto" : "smooth" });
+      }
+      try { history.replaceState(null, "", "#" + t.getAttribute("data-tab")); } catch (err) {}
       return;
     }
     var a = e.target.closest("[data-article]");
@@ -617,8 +624,16 @@
   $("mobile-menu-btn").addEventListener("click", function () {
     var d = $("mobile-drawer"); d.hidden = !d.hidden; this.setAttribute("aria-expanded", d.hidden ? "false" : "true");
   });
-  var savedTab = store("end-tab");
+  var hashTab = (location.hash || "").replace("#", "");
+  var savedTab = (hashTab && $("tab-pane-" + hashTab)) ? hashTab : store("end-tab");
   if (savedTab && $("tab-pane-" + savedTab)) showTab(savedTab);
+  if (hashTab && $("tab-pane-" + hashTab)) setTimeout(function () {
+    var bar = document.querySelector(".tab-nav-bar"), head = document.querySelector(".navbar-header");
+    window.scrollTo({ top: Math.max(0, bar.getBoundingClientRect().top + window.scrollY - (head ? head.offsetHeight : 0) - 8) });
+  }, 50);
+  window.addEventListener("hashchange", function () {
+    var h = (location.hash || "").replace("#", ""); if (h && $("tab-pane-" + h)) showTab(h);
+  });
 
   // ===================== THEME =====================
   function setKelly(on) {
