@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Eagles Nation Daily: an independent Philadelphia Eagles fan hub with the 2026 schedule, roster, news, fan polls and game-day gear.">
+<meta name="description" content="Eagles Nation Daily: an independent Philadelphia Eagles fan hub with the 2026 schedule, roster, news, highlights, fan polls and game-day gear.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦅</text></svg>">
 <title>Eagles Nation Daily</title>
 <link rel="stylesheet" href="styles.css">
@@ -59,6 +59,26 @@
   #mobile-drawer .stack { display: flex; flex-direction: column; gap: 8px; }
   .footer-col a[target] { color: var(--eagles-text-muted); }
   button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--eagles-accent); outline-offset: 2px; }
+  .media-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .7rem; }
+  .media-chip { display: inline-flex; align-items: center; gap: 4px; font: 700 .74rem -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #fff; background: rgba(255,255,255,.06); border: 1px solid var(--eagles-border); border-radius: 9999px; padding: 4px 10px; text-decoration: none; cursor: pointer; }
+  .media-chip:hover { background: var(--eagles-primary); border-color: var(--eagles-primary-light); }
+  .media-chip.play { background: var(--eagles-primary); border-color: var(--eagles-primary-light); }
+  .film-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 1.25rem; }
+  .film-card { background: var(--eagles-bg-surface); border: 1px solid var(--eagles-border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; }
+  .film-thumb { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; border: 0; padding: 0; cursor: pointer; overflow: hidden; color: #fff; }
+  .film-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .film-score { position: absolute; left: 1rem; bottom: .6rem; font-size: 2.4rem; color: rgba(255,255,255,.25); }
+  .play-badge { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 58px; height: 58px; border-radius: 50%; background: rgba(0,0,0,.6); border: 2px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; padding-left: 4px; transition: transform var(--transition-fast); }
+  .film-thumb:hover .play-badge { transform: translate(-50%,-50%) scale(1.1); background: var(--eagles-primary); }
+  .film-body { padding: 1rem 1.25rem 1.25rem; }
+  .film-title { color: #fff; font-weight: 800; font-size: 1rem; line-height: 1.3; }
+  .video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-md); overflow: hidden; background: #000; margin-bottom: .75rem; }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 1.25rem; }
+  .photo-card { margin: 0; background: var(--eagles-bg-surface); border: 1px solid var(--eagles-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .photo-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .photo-card figcaption { padding: .75rem 1rem; font-size: .85rem; color: var(--eagles-text-accent); display: flex; flex-direction: column; gap: 2px; }
+  .photo-card figcaption span, .photo-card figcaption a { font-size: .72rem; color: var(--eagles-text-muted); }
   @media (max-width: 992px) { .overview-grid { grid-template-columns: 1fr; } .injury-grid { grid-template-columns: 1fr; } }
   @media (max-width: 768px) {
     .nav-container, .hero-section { padding-inline: 16px; }
@@ -164,17 +184,17 @@
     </div>
 
     <div class="overview-grid">
-      <div class="feature-banner" data-article="oline" role="button" tabindex="0">
+      <div class="feature-banner" data-article="london" role="button" tabindex="0">
         <div class="inner">
           <span class="tag-pill">Cover Story</span>
-          <h3>A rebuilt offensive line heads to London</h3>
-          <p>Lane Johnson retired and Cam Jurgens was traded within days. Four new faces line up next to Jordan Mailata against one of the league's best defenses.</p>
+          <h3>Last-second kick sinks the Birds in London</h3>
+          <p>Jake Elliott put the Eagles ahead with 8 seconds left, but a long kickoff return set up Cam Little's 57-yarder at the gun. Jacksonville wins 19-17 and the Eagles fall to 2-3.</p>
         </div>
       </div>
       <div class="side-stack">
         <div class="side-card">
           <div class="head"><h4>📊 Quick Fan Poll</h4><span class="kicker-live" style="color:var(--eagles-accent-gold)">LIVE</span></div>
-          <p>Week 5 in London: how does it go against Jacksonville?</p>
+          <p>Week 6 at the Linc: how does it go against Carolina?</p>
           <button class="btn-primary" data-tab="fanzone" type="button">Cast Your Vote ➔</button>
         </div>
         <div class="side-card">
@@ -242,7 +262,7 @@
       <input type="text" id="roster-search" class="roster-search-input" placeholder="🔍 Search by name or position" aria-label="Search roster">
     </div>
     <div class="roster-grid" id="roster-grid"></div>
-    <p style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:1.25rem;">Built from the <a class="source-link" href="https://www.nbcsportsphiladelphia.com/nfl/philadelphia-eagles/eagles-announce-initial-53-man-roster-for-2026-season/748708/" target="_blank" rel="noopener">initial 53-man roster</a>, updated with moves through Week 5.</p>
+    <p style="font-size:.78rem;color:var(--eagles-text-muted);margin-top:1.25rem;">Built from the <a class="source-link" href="https://www.nbcsportsphiladelphia.com/nfl/philadelphia-eagles/eagles-announce-initial-53-man-roster-for-2026-season/748708/" target="_blank" rel="noopener">initial 53-man roster</a>, updated through Oct 12, 2026.</p>
   </section>
 
   <!-- FAN ZONE -->
@@ -316,11 +336,23 @@
         <p>This week's storylines, the injury report and the offseason that reshaped the roster.</p>
       </div>
     </div>
+    <div class="section-header" style="margin-bottom:1.25rem">
+      <div>
+        <h3 style="font-size:1.5rem;font-weight:900;color:#fff;">🎬 Film Room</h3>
+        <p>Official game highlights from the NFL and the team, newest first.</p>
+      </div>
+    </div>
+    <div class="film-grid" id="film-grid"></div>
+    <div id="photo-wrap" hidden>
+      <h3 style="font-size:1.5rem;font-weight:900;color:#fff;margin:2.5rem 0 1.25rem">📸 Game Day Photos</h3>
+      <div class="photo-grid" id="photo-grid"></div>
+    </div>
+    <h3 style="font-size:1.5rem;font-weight:900;color:#fff;margin:2.5rem 0 1.25rem">📰 Storylines</h3>
     <div class="news-grid" id="news-grid"></div>
-    <div class="injury-grid" aria-label="Week 5 injury report">
-      <div class="side-card"><h4 style="color:#f87171;margin-bottom:.75rem">Out · Week 5</h4><ul><li>RB Saquon Barkley</li><li>RB Tank Bigsby</li><li>WR DeVonta Smith</li><li>S Marcus Epps (groin)</li></ul></div>
-      <div class="side-card"><h4 style="color:var(--eagles-accent-gold);margin-bottom:.75rem">Questionable</h4><ul><li>OLB Jonathan Greenard (ankle)</li><li>OLB A.J. Epenesa (back)</li></ul></div>
-      <div class="side-card"><h4 style="color:#4ade80;margin-bottom:.75rem">Expected to play</h4><ul><li>CB Quinyon Mitchell (knee)</li><li>LB Zack Baun (cleared protocol)</li><li>LB Jihaad Campbell (knee)</li></ul></div>
+    <div class="injury-grid" aria-label="Week 6 injury watch">
+      <div class="side-card"><h4 style="color:#f87171;margin-bottom:.75rem">Hurt in London</h4><ul><li>RB Will Shipley (foot)</li><li>OLB Jalyx Hunt (knee, ankle)</li><li>S Michael Carter II (abdomen)</li><li>RG Tyler Steen (shoulder, returned)</li></ul></div>
+      <div class="side-card"><h4 style="color:var(--eagles-accent-gold);margin-bottom:.75rem">Missed Week 5</h4><ul><li>RB Saquon Barkley (hamstring)</li><li>WR DeVonta Smith (hamstring)</li><li>WR Hollywood Brown (ankle)</li><li>OLB Jonathan Greenard (ankle)</li><li>S Marcus Epps (groin)</li><li>OL Drew Kendall (knee)</li></ul></div>
+      <div class="side-card"><h4 style="color:#4ade80;margin-bottom:.75rem">Injured reserve</h4><ul><li>RB Tank Bigsby</li><li>TE Eli Stowers</li></ul><p style="margin:1rem 0 0;font-size:.8rem">First Week 6 practice report due Wednesday.</p></div>
     </div>
   </section>
 
@@ -389,7 +421,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <div>Eagles Nation Daily is an independent fan site, not affiliated with or endorsed by the Philadelphia Eagles or the NFL. Info current as of Oct 10, 2026.</div>
+    <div>Eagles Nation Daily is an independent fan site, not affiliated with or endorsed by the Philadelphia Eagles or the NFL. Info current as of Oct 12, 2026.</div>
   </div>
 </footer>
 
@@ -401,8 +433,8 @@
     TEN: { name: "Titans", city: "Tennessee", color: "#0C2340" },
     CHI: { name: "Bears", city: "Chicago", color: "#0B162A" },
     LAR: { name: "Rams", city: "Los Angeles", color: "#003594" },
-    JAX: { name: "Jaguars", city: "Jacksonville", color: "#006778", rec: "3-1" },
-    CAR: { name: "Panthers", city: "Carolina", color: "#0085CA" },
+    JAX: { name: "Jaguars", city: "Jacksonville", color: "#006778", rec: "4-1" },
+    CAR: { name: "Panthers", city: "Carolina", color: "#0085CA", rec: "2-2" },
     DAL: { name: "Cowboys", city: "Dallas", color: "#041E42" },
     NYG: { name: "Giants", city: "New York", color: "#0B2265" },
     PIT: { name: "Steelers", city: "Pittsburgh", color: "#101820" },
@@ -413,11 +445,16 @@
     SF:  { name: "49ers", city: "San Francisco", color: "#AA0000" }
   };
   var GAMES = [
-    { w: 1, o: "WAS", home: true,  t: "2026-09-13T16:25:00-04:00", tv: "FOX", res: "W", us: 24, them: 22, note: "Season opener at the Linc. A two-point win to start 1-0." },
-    { w: 2, o: "TEN", home: false, t: "2026-09-20T13:00:00-04:00", tv: "FOX", res: "W", us: 24, them: 20, note: "A four-point road win in Nashville." },
-    { w: 3, o: "CHI", home: false, t: "2026-09-28T20:15:00-04:00", tv: "ESPN/ABC", res: "L", us: 7, them: 27, note: "Monday Night Football at Soldier Field. The offense managed one touchdown." },
-    { w: 4, o: "LAR", home: true,  t: "2026-10-04T13:00:00-04:00", tv: "FOX", res: "L", us: 20, them: 24, note: "A four-point home loss drops the Birds to .500." },
-    { w: 5, o: "JAX", home: false, t: "2026-10-11T09:30:00-04:00", tv: "NFL Network", venue: "Tottenham Hotspur Stadium, London", note: "International game in London." },
+    { w: 1, o: "WAS", home: true,  t: "2026-09-13T16:25:00-04:00", tv: "FOX", res: "W", us: 24, them: 22, note: "Season opener at the Linc. A two-point win to start 1-0." ,
+      media: { hl: "https://www.philadelphiaeagles.com/video/game-highlights-eagles-24-commanders-22-2026-nfl-regular-season-week-1", hlSrc: "PhiladelphiaEagles.com" } },
+    { w: 2, o: "TEN", home: false, t: "2026-09-20T13:00:00-04:00", tv: "FOX", res: "W", us: 24, them: 20, note: "A four-point road win in Nashville." ,
+      media: { hl: "https://www.philadelphiaeagles.com/video/game-highlights-eagles-24-titans-20-2026-nfl-regular-season-week-2", hlSrc: "PhiladelphiaEagles.com" } },
+    { w: 3, o: "CHI", home: false, t: "2026-09-28T20:15:00-04:00", tv: "ESPN/ABC", res: "L", us: 7, them: 27, note: "Monday Night Football at Soldier Field. The offense managed one touchdown." ,
+      media: { hl: "https://www.philadelphiaeagles.com/video/highlights/", hlSrc: "PhiladelphiaEagles.com" } },
+    { w: 4, o: "LAR", home: true,  t: "2026-10-04T13:00:00-04:00", tv: "FOX", res: "L", us: 20, them: 24, note: "A four-point home loss drops the Birds to .500." ,
+      media: { hl: "https://www.nfl.com/videos/rams-vs-eagles-highlights-week-4", hlSrc: "NFL.com", recap: "https://www.philadelphiaeagles.com/news/rams-vs-eagles-game-recap-october-4-2026-nfl-week-4-regular-season-jalen-hurts-matthew-stafford", yt: "qg7CFx7-HUo", ytTitle: "Rams vs. Eagles Week 4 Recap | NFL Daily", ytChannel: "NFL" } },
+    { w: 5, o: "JAX", home: false, t: "2026-10-11T09:30:00-04:00", tv: "NFL Network", venue: "Tottenham Hotspur Stadium, London", res: "L", us: 17, them: 19, note: "London. Cam Little's 57-yard field goal at the gun beat the Birds after Jake Elliott's go-ahead kick with 8 seconds left." ,
+      media: { hl: "https://www.philadelphiaeagles.com/video/highlights/", hlSrc: "PhiladelphiaEagles.com", recap: "https://www.philadelphiaeagles.com/news/game-recap-eagles-at-jaguars-2026-nfl-week-6-nfl-international-game-london-jalen-hurts-trevor-lawrence" } },
     { w: 6, o: "CAR", home: true,  t: "2026-10-18T13:00:00-04:00", tv: "CBS" },
     { w: 7, o: "DAL", home: true,  t: "2026-10-26T20:15:00-04:00", tv: "ESPN/ABC", note: "Monday Night Football. First of two meetings with Dallas." },
     { w: 8, o: "WAS", home: false, t: "2026-11-01T20:20:00-05:00", tv: "NBC", note: "Sunday Night Football." },
@@ -436,98 +473,99 @@
   // unit, pos, name, status (out|q|new|ir|null), note
   var ROSTER = [
     ["offense","QB","Jalen Hurts",null,"Franchise quarterback and captain, leading a reshaped offense under new coordinator Sean Mannion."],
-    ["offense","QB","Andy Dalton","new","Veteran backup acquired in a trade with Carolina."],
-    ["offense","QB","Tanner McKee",null,"Backup quarterback."],
+    ["offense","QB","Tanner McKee",null,"Backup quarterback. Won the No. 2 job, and Andy Dalton was released on Oct. 9."],
     ["offense","QB","Cole Payton","new","Fifth-round rookie from North Dakota State."],
-    ["offense","RB","Saquon Barkley","out","Out for Week 5."],
-    ["offense","RB","Tank Bigsby","out","Out for Week 5."],
-    ["offense","RB","Will Shipley","q","In line to start in London with Barkley and Bigsby out."],
-    ["offense","RB","Dameon Pierce","new","Added to the backfield. 1,684 career rushing yards entering the week."],
-    ["offense","RB","Carson Steele","new","Signed to add depth at running back."],
-    ["offense","WR","DeVonta Smith","out","Out for Week 5."],
-    ["offense","WR","Makai Lemon","new","First-round pick (No. 20 overall) from USC."],
-    ["offense","WR","Marquise “Hollywood” Brown","new","Signed in free agency on a one-year deal."],
-    ["offense","WR","Dontayvion Wicks","new","Acquired in a trade with Green Bay."],
+    ["offense","RB","Saquon Barkley","out","Missed the London game with the hamstring injury from the Rams game. Status for Carolina not yet announced."],
+    ["offense","RB","Tank Bigsby","ir","Placed on injured reserve Oct. 6 after getting hurt late in the Week 4 loss to the Rams."],
+    ["offense","RB","Will Shipley","out","Started in London and scored on a 2-yard run, then left in the second quarter with a foot injury and did not return."],
+    ["offense","RB","Dameon Pierce","new","Took over the backfield after Shipley got hurt in London: 11 carries for 14 yards."],
+    ["offense","RB","Carson Steele","new","Signed to the active roster Oct. 9 and active in London."],
+    ["offense","WR","DeVonta Smith","out","Missed the London game with a hamstring injury, his third straight missed game."],
+    ["offense","WR","Makai Lemon","new","First-round pick (No. 20 overall) from USC. Five catches for 43 yards in London."],
+    ["offense","WR","Marquise “Hollywood” Brown","out","Signed in free agency on a one-year deal. Missed the London game with an ankle injury."],
+    ["offense","WR","Dontayvion Wicks","new","Acquired in a trade with Green Bay. Five catches for 63 yards in London."],
     ["offense","WR","Elijah Moore",null,"Receiver depth."],
-    ["offense","WR","Darius Cooper",null,"Receiver depth."],
+    ["offense","WR","Darius Cooper",null,"Took a short Jalen Hurts pass 62 yards for a touchdown in London."],
     ["offense","TE","Dallas Goedert",null,"Re-signed on a one-year deal."],
     ["offense","TE","Johnny Mundt",null,"Blocking tight end."],
     ["offense","TE","E.J. Jenkins",null,"Tight end depth."],
     ["offense","TE","Eli Stowers","ir","Second-round rookie from Vanderbilt. On injured reserve."],
     ["offense","LT","Jordan Mailata",null,"The veteran anchor of a rebuilt line."],
     ["offense","LG","Willie Lampkin",null,"Expected starter at left guard."],
-    ["offense","C","Jake Majors","new","Signed and expected to start at center after the Cam Jurgens trade."],
-    ["offense","RG","Tyler Steen",null,"Expected starter at right guard."],
+    ["offense","C","Jake Majors","new","Signed to the active roster Oct. 9 after the Cam Jurgens trade."],
+    ["offense","RG","Tyler Steen",null,"Starting right guard. Hurt his shoulder in London, missed part of the second half and returned in the fourth quarter."],
     ["offense","RT","Markel Bell","new","Third-round rookie from Miami, stepping in at right tackle after Lane Johnson's retirement."],
     ["offense","G","Landon Dickerson",null,"Veteran guard."],
     ["offense","OL","Fred Johnson",null,"Swing tackle."],
-    ["offense","OL","Drew Kendall","out","Rehabbing a knee injury."],
+    ["offense","OL","Drew Kendall","out","Missed the London game with a knee injury."],
     ["offense","G","Micah Morris","new","Sixth-round rookie from Georgia."],
-    ["defense","DT","Jalen Carter",null,"Signed a four-year, $152M extension. The centerpiece of the defense."],
+    ["defense","DT","Jalen Carter",null,"Signed a four-year, $152M extension. Had two strip-sacks in London while playing with a cast on his wrist."],
     ["defense","DT","Jordan Davis",null,"Signed a three-year, $78M extension."],
     ["defense","DT","Moro Ojomo",null,"Interior rotation."],
     ["defense","DT","Byron Young",null,"Interior rotation."],
     ["defense","DT","Ty Robinson",null,"Interior depth."],
-    ["defense","OLB","Jonathan Greenard","q","Acquired from Minnesota and extended (4 years, $100M). Questionable with an ankle injury."],
+    ["defense","OLB","Jonathan Greenard","out","Acquired from Minnesota and extended (4 years, $100M). Missed the London game with an ankle injury from the Rams game."],
     ["defense","OLB","Nolan Smith",null,"Edge rusher."],
-    ["defense","OLB","Jalyx Hunt",null,"Edge rusher."],
-    ["defense","OLB","A.J. Epenesa","q","Questionable with a back injury."],
+    ["defense","OLB","Jalyx Hunt","out","Hurt his knee and ankle on the final play of the first half in London and was ruled out. Wore a walking boot after the game."],
+    ["defense","OLB","A.J. Epenesa",null,"Played in London after being listed questionable with a back injury."],
     ["defense","OLB","Arnold Ebiketie",null,"Edge depth."],
-    ["defense","LB","Zack Baun",null,"Cleared concussion protocol and expected to play."],
-    ["defense","LB","Jihaad Campbell",null,"Expected to play after being limited with a knee injury."],
-    ["defense","LB","Jeremiah Trotter Jr.",null,"Linebacker depth."],
+    ["defense","LB","Zack Baun",null,"Stuffed a fourth-and-goal run at the 1 to end the first half in London."],
+    ["defense","LB","Jihaad Campbell",null,"Played in London after being limited in practice with a knee injury."],
+    ["defense","LB","Jeremiah Trotter Jr.",null,"Linebacker depth. Ejected after a scrum on the opening kickoff in London."],
     ["defense","LB","Smael Mondon Jr.",null,"Linebacker depth."],
-    ["defense","CB","Quinyon Mitchell",null,"Practiced all week on a knee and expected to play."],
+    ["defense","CB","Quinyon Mitchell",null,"Picked off Trevor Lawrence in London, his first regular-season interception."],
     ["defense","CB","Cooper DeJean",null,"Slot corner and playmaker."],
     ["defense","CB","Riq Woolen","new","Signed in free agency on a one-year, $12M deal."],
     ["defense","CB","Jonathan Jones",null,"Veteran corner."],
     ["defense","CB","Kelee Ringo",null,"Corner depth."],
     ["defense","CB","Mac McWilliams",null,"Corner depth."],
     ["defense","S","Drew Mukuba",null,"Starting safety."],
-    ["defense","S","Michael Carter II",null,"Safety."],
-    ["defense","S","Marcus Epps","out","Out with a groin injury."],
-    ["special teams","K","Jake Elliott",null,"Kicker."],
+    ["defense","S","Michael Carter II","out","Left the London game before halftime with an abdomen injury and was ruled out."],
+    ["defense","S","Marcus Epps","out","Missed the London game with a groin injury."],
+    ["special teams","K","Jake Elliott",null,"Kicker. Hit a 48-yard field goal with 8 seconds left in London for a 17-16 lead."],
     ["special teams","P","Braden Mann","new","Signed a four-year, $14M deal."],
     ["special teams","LS","Rocco Underwood",null,"Long snapper."]
   ];
   var PLAYMAKERS = ["Jalen Hurts", "Jalen Carter", "Makai Lemon", "Quinyon Mitchell"];
 
   var NEWS = [
-    { id: "oline", cat: "Week 5 Preview", title: "A rebuilt offensive line heads to London", date: "Oct 10, 2026", color: "#004C54",
-      body: ["Lane Johnson retired and Cam Jurgens was traded within a few days of each other, ending the most stable stretch of offensive line play in the league.",
-             "The expected starting five in London is Jordan Mailata at left tackle, Willie Lampkin at left guard, Jake Majors at center, Tyler Steen at right guard and third-round rookie Markel Bell at right tackle.",
-             "Only Mailata has a long résumé. The group faces a Jacksonville defense that is near the top of the league against the run and in points allowed."],
-      src: "https://www.philadelphiaeagles.com/news/game-preview-at-jaguars-6-storylines-to-follow-jordan-mailata-jalen-hurts-trevor-lawrence-travis-hunter-2026-nfl-week-6-london-international-game" },
-    { id: "rb", cat: "Backfield", title: "Next man up at running back", date: "Oct 10, 2026", color: "#056974",
-      body: ["Saquon Barkley and Tank Bigsby are both out for the trip to London.",
-             "Will Shipley is in line to start. Dameon Pierce, who has 1,684 career rushing yards, and newly signed Carson Steele give the Eagles two more backs to work with.",
-             "With DeVonta Smith also out, more of the offense falls on Jalen Hurts and the young receivers."],
-      src: "https://www.philadelphiaeagles.com/news/eagles-sign-jake-majors-and-carson-steele" },
-    { id: "jax", cat: "Scouting the Opponent", title: "Points are hard to find against the Jaguars", date: "Oct 10, 2026", color: "#003035",
-      body: ["Jacksonville comes in at 3-1. The defense allows 13.3 points and 74.3 rushing yards per game and has held 10 straight opponents to 20 points or fewer.",
-             "Jaguars kicker Cam Little holds the NFL record with a 68-yard field goal, so any drive that crosses midfield is a scoring threat.",
-             "Third-down conversions will decide whether the Eagles can sustain drives."],
-      src: "https://www.philadelphiaeagles.com/news/game-preview-at-jaguars-6-storylines-to-follow-jordan-mailata-jalen-hurts-trevor-lawrence-travis-hunter-2026-nfl-week-6-london-international-game" },
+    { id: "london", cat: "Game Recap", title: "Last-second kick sinks the Birds in London", date: "Oct 11, 2026", color: "#003035",
+      body: ["Jacksonville beat the Eagles 19-17 at Tottenham Hotspur Stadium. Jake Elliott made a 48-yard field goal with 8 seconds left for a 17-16 lead, but a long kickoff return set up Cam Little's 57-yard winner as time ran out.",
+             "The Eagles led 14-7 at halftime on a short Will Shipley touchdown run and a 62-yard catch-and-run score by Darius Cooper. Jalen Hurts finished 21 of 40 for 220 yards and a touchdown.",
+             "The defense kept it close. Jalen Carter had two strip-sacks, Quinyon Mitchell made his first regular-season interception, and Zack Baun stopped a fourth-and-goal run at the 1 to end the half.",
+             "It is the Eagles' third straight loss, dropping them to 2-3 for the first time since 2021."],
+      src: "https://www.philadelphiaeagles.com/news/game-recap-eagles-at-jaguars-2026-nfl-week-6-nfl-international-game-london-jalen-hurts-trevor-lawrence" },
+    { id: "kickoff", cat: "Postgame", title: "Sirianni takes the blame for the final kickoff", date: "Oct 11, 2026", color: "#235213",
+      body: ["After Elliott's go-ahead kick, the Eagles kicked off in play, and Jacksonville returned it into field-goal range with a second left.",
+             "Nick Sirianni said afterward he made the wrong call by not having the kick sent out of bounds, and he took full responsibility for the loss.",
+             "The decision overshadowed a strong defensive day that included two goal-line stands."],
+      src: "https://www.inquirer.com/eagles/jaguars-london-loss-nfl-week-5-cam-little-20261011.html" },
+    { id: "injuries", cat: "Injuries", title: "Four more Eagles hurt in London", date: "Oct 12, 2026", color: "#056974",
+      body: ["Running back Will Shipley left in the second quarter with a foot injury and did not return, leaving Dameon Pierce as the lead back. The Eagles ran 18 times for 22 yards.",
+             "Edge rusher Jalyx Hunt hurt his knee and ankle on the last play of the first half and wore a walking boot after the game. Safety Michael Carter II left with an abdomen injury.",
+             "Right guard Tyler Steen hurt his shoulder but came back in the fourth quarter. Linebacker Jeremiah Trotter Jr. was ejected after a scrum on the opening kickoff.",
+             "Saquon Barkley, DeVonta Smith, Hollywood Brown, Jonathan Greenard, Marcus Epps and Drew Kendall all missed the game. The first Week 6 injury report comes Wednesday."],
+      src: "https://www.inquirer.com/eagles/live/eagles-score-news-injury-report-next-game-schedule-20261012.html" },
+    { id: "car", cat: "Week 6 Preview", title: "Up next: Carolina at the Linc", date: "Oct 12, 2026", color: "#004C54",
+      body: ["The Eagles host the Panthers on Sunday, Oct. 18 at 1 p.m. ET on CBS.",
+             "Carolina is 2-2 and coming off its bye. Bryce Young leads the league in passing yards per game, so the secondary will be tested.",
+             "The bigger question is the Eagles' offense, which managed 22 rushing yards in London and needs to find a run game with its top backs hurt."],
+      src: "https://www.inquirer.com/eagles/live/eagles-score-news-injury-report-next-game-schedule-20261012.html" },
+    { id: "dalton", cat: "Roster Moves", title: "Andy Dalton released after four weeks", date: "Oct 9, 2026", color: "#235213",
+      body: ["The Eagles released veteran quarterback Andy Dalton on Oct. 9, ahead of the trip to London.",
+             "Tanner McKee had already won the backup job, and injuries made a four-quarterback roster hard to keep. The same day, the team signed center Jake Majors and running back Carson Steele to the active roster.",
+             "Cole Payton is now the third quarterback behind Hurts and McKee."],
+      src: "https://www.nbcsportsphiladelphia.com/nfl/philadelphia-eagles/eagles-reportedly-releasing-andy-dalton-after-4-weeks-on-roster/757723/" },
     { id: "ajb", cat: "Offseason", title: "The A.J. Brown era ends with a trade to New England", date: "Offseason", color: "#235213",
       body: ["The Eagles traded A.J. Brown to the Patriots for a 2028 first-round pick and a 2027 fifth-rounder.",
              "They moved up to No. 20 in the draft, in a deal with Dallas, to take USC receiver Makai Lemon. They also signed Marquise Brown and traded for Dontayvion Wicks.",
              "The receiver room around DeVonta Smith is younger and faster, and still finding its rhythm."],
-      src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" },
-    { id: "dline", cat: "Defense", title: "Paying the men up front", date: "Offseason", color: "#387822",
-      body: ["Jalen Carter signed a four-year, $152 million extension and Jordan Davis signed for three years and $78 million.",
-             "The Eagles also traded for Jonathan Greenard from Minnesota and gave him a four-year, $100 million deal.",
-             "Departures included Reed Blankenship, Nakobe Dean and Jaelan Phillips, so Vic Fangio is working with plenty of new pieces."],
-      src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" },
-    { id: "staff", cat: "Coaching", title: "Mannion takes over the offense", date: "Offseason", color: "#0E161C",
-      body: ["Sean Mannion was named offensive coordinator on January 29, replacing Kevin Patullo after one season.",
-             "Chris Kuper replaced longtime offensive line coach Jeff Stoutland, and Parks Frazier became quarterbacks coach.",
-             "Vic Fangio returns as defensive coordinator under Nick Sirianni."],
       src: "https://en.wikipedia.org/wiki/2026_Philadelphia_Eagles_season" }
   ];
 
   var POLLS = [
-    { id: "wk5", q: "Week 5 in London: how does it go?", opts: [["big-w","Eagles win by 7+"],["close-w","Eagles win a close one"],["close-l","Close loss"],["big-l","Jags win by 7+"]] },
-    { id: "step", q: "With Saquon out, who has to step up most?", opts: [["hurts","Jalen Hurts"],["shipley","Will Shipley"],["oline","The rebuilt offensive line"],["lemon","Makai Lemon"]] },
+    { id: "wk6", q: "Week 6 vs. Carolina: how does it go?", opts: [["big-w","Eagles win by 7+"],["close-w","Eagles win a close one"],["close-l","Close loss"],["big-l","Panthers win by 7+"]] },
+    { id: "fix", q: "After London, what has to get fixed first?", opts: [["run","The run game"],["late","Late-game decisions"],["health","Getting healthy"],["pass","Big plays in the passing game"]] },
     { id: "move", q: "Best move of the offseason?", opts: [["carter","Extending Jalen Carter"],["greenard","Trading for Jonathan Greenard"],["lemon","Drafting Makai Lemon"],["ajb","Trading A.J. Brown for a first"]] },
     { id: "final", q: "Where does 2026 end?", opts: [["sb","Super Bowl"],["nfc","NFC Championship"],["wc","Early playoff exit"],["miss","Missing the playoffs"]] }
   ];
@@ -604,9 +642,9 @@
   var STATS = [
     ["🏈", rec, "Season Record"],
     ["📈", (pf / played.length).toFixed(1), "Points Per Game"],
-    ["🎯", "643", "Passing Yards · 7 TD"],
-    ["🏃", "436", "Rushing Yards · 4.2 Avg"],
-    ["💥", "4", "Defensive Sacks"]
+    ["🎯", "853", "Passing Yards · 8 TD"],
+    ["🏃", "458", "Rushing Yards · 3.8 Avg"],
+    ["💥", "6", "Defensive Sacks"]
   ];
   $("stats-strip-container").innerHTML = STATS.map(function (s) {
     return '<div class="stat-metric-card"><div class="stat-icon">' + s[0] + '</div><div class="stat-meta"><div class="stat-val font-num">' + s[1] + '</div><div class="stat-label">' + s[2] + '</div></div></div>';
@@ -647,6 +685,52 @@
     $("next-matchup-container").innerHTML = '<div class="matchup-header"><span class="label">Season complete</span></div><p style="color:var(--eagles-text-muted)">See you next season, Nation.</p>';
   }
 
+  // ===================== MEDIA (official embeds + licensed photos only) =====================
+  // Videos: only official channels (NFL, team, licensed broadcasters) embedded through YouTube's own player.
+  // Photos: only images we have the right to use (own photos, Creative Commons / public domain with credit).
+  // Embedded players work on the Netlify site; inside claude.ai embeds are blocked, so they open on YouTube instead.
+  var CAN_EMBED = !window.claude && !/claude|anthropic/i.test(location.hostname);
+  var PHOTOS = [
+    // { src: "media/linc.jpg", alt: "Lincoln Financial Field at night", credit: "Photo: Rich Nicholson", license: "", link: "" }
+  ];
+  function mediaRow(m) {
+    if (!m) return "";
+    var bits = [];
+    if (m.yt) bits.push('<button type="button" class="media-chip play" data-yt="' + esc(m.yt) + '" data-yt-title="' + esc(m.ytTitle || "Highlights") + '" data-yt-ch="' + esc(m.ytChannel || "") + '">▶ Watch</button>');
+    if (m.hl) bits.push('<a class="media-chip" href="' + esc(m.hl) + '" target="_blank" rel="noopener">🎬 Highlights · ' + esc(m.hlSrc || "Official") + ' ↗</a>');
+    if (m.recap) bits.push('<a class="media-chip" href="' + esc(m.recap) + '" target="_blank" rel="noopener">📝 Recap ↗</a>');
+    return bits.length ? '<div class="media-row">' + bits.join("") + '</div>' : "";
+  }
+  function ytThumb(id) { return CAN_EMBED ? '<img src="https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">' : ""; }
+  function openVideo(id, title, ch) {
+    var watch = "https://www.youtube.com/watch?v=" + encodeURIComponent(id);
+    if (!CAN_EMBED) { var a = document.createElement("a"); a.href = watch; a.target = "_blank"; a.rel = "noopener"; document.body.appendChild(a); a.click(); a.remove(); return; }
+    $("article-modal-body").innerHTML = '<div class="news-category-tag">Video' + (ch ? ' · ' + esc(ch) : '') + '</div><h2>' + esc(title) + '</h2>' +
+      '<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0" title="' + esc(title) + '" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>' +
+      '<a class="source-link" href="' + watch + '" target="_blank" rel="noopener">Watch on YouTube ↗</a>';
+    openModal("article-modal");
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-yt]"); if (!b) return;
+    e.preventDefault(); openVideo(b.getAttribute("data-yt"), b.getAttribute("data-yt-title"), b.getAttribute("data-yt-ch"));
+  });
+  function renderFilmRoom() {
+    var cards = GAMES.filter(function (g) { return g.res && g.media; }).slice().reverse().map(function (g) {
+      var t = TEAMS[g.o], m = g.media, title = "Week " + g.w + ": " + (g.home ? "vs " : "@ ") + t.name + " · " + g.res + " " + g.us + "-" + g.them;
+      var thumb = m.yt
+        ? '<button type="button" class="film-thumb" data-yt="' + esc(m.yt) + '" data-yt-title="' + esc(m.ytTitle || title) + '" data-yt-ch="' + esc(m.ytChannel || "") + '" aria-label="Play ' + esc(m.ytTitle || title) + '" style="background:linear-gradient(135deg,' + t.color + ',#070B0E)">' + ytThumb(m.yt) + '<span class="play-badge">▶</span></button>'
+        : '<a class="film-thumb" href="' + esc(m.hl) + '" target="_blank" rel="noopener" aria-label="Watch highlights on ' + esc(m.hlSrc) + '" style="background:linear-gradient(135deg,' + t.color + ',#070B0E)"><span class="film-score font-num">' + g.us + '-' + g.them + '</span><span class="play-badge">▶</span></a>';
+      return '<div class="film-card">' + thumb + '<div class="film-body"><div class="news-category-tag">' + (m.yt ? esc(m.ytChannel || "Official") + ' · YouTube' : esc(m.hlSrc) + ' · Official') + '</div>' +
+        '<div class="film-title">' + esc(title) + '</div>' + mediaRow({ hl: m.hl, hlSrc: m.hlSrc, recap: m.recap }) + '</div></div>';
+    }).join("");
+    $("film-grid").innerHTML = cards || '<p style="color:var(--eagles-text-muted)">Highlights appear here after each game.</p>';
+    $("photo-grid").innerHTML = PHOTOS.map(function (p) {
+      return '<figure class="photo-card"><img src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '" loading="lazy" onerror="this.closest(\'figure\').remove()">' +
+        '<figcaption>' + esc(p.alt || "") + '<span>' + (p.link ? '<a href="' + esc(p.link) + '" target="_blank" rel="noopener">' + esc(p.credit) + '</a>' : esc(p.credit || "")) + (p.license ? ' · ' + esc(p.license) : '') + '</span></figcaption></figure>';
+    }).join("");
+    $("photo-wrap").hidden = !PHOTOS.length;
+  }
+
   // ===================== SCHEDULE =====================
   var schedFilter = "all";
   function renderSchedule() {
@@ -669,7 +753,7 @@
         '<div class="game-teams-row"><div class="game-opponent-info"><div class="game-opponent-icon font-num" style="font-size:.8rem;background:' + t.color + ';color:#fff">' + g.o + '</div>' +
         '<div><div class="game-opponent-name">' + (g.home ? "vs " : "@ ") + t.name + '</div><div class="game-location-badge">' + (g.home ? "🏟️ Home · The Linc" : "✈️ Road") + '</div></div></div>' +
         '<div class="game-score-display">' + score + '</div></div>' +
-        '<div class="game-card-footer">' + esc(when) + (g.res ? ' · ' + g.tv : '') + (g.note ? '<br>' + esc(g.note) : '') + '</div></div>';
+        '<div class="game-card-footer">' + esc(when) + (g.res ? ' · ' + g.tv : '') + (g.note ? '<br>' + esc(g.note) : '') + mediaRow(g.media) + '</div></div>';
     }).join("");
   }
   document.querySelectorAll(".schedule-filter-btn").forEach(function (b) {
@@ -754,6 +838,8 @@
       '<div class="news-summary">' + esc(n.body[0]) + '</div></div>' +
       '<div class="news-meta-row"><span>' + esc(n.date) + '</span><span style="color:var(--eagles-accent)">Read ➔</span></div></div></div>';
   }).join("");
+
+  renderFilmRoom();
 
   // ===================== GEAR =====================
   $("merch-grid").innerHTML =
@@ -929,6 +1015,5 @@
   })();
 })();
 </script>
-
 </body>
 </html>
